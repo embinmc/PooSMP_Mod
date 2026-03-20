@@ -27,7 +27,7 @@ public final class ItemUses {
             if (player.getCooldowns().isOnCooldown(itemStack)) return InteractionResult.PASS;
             if (level instanceof ServerLevel serverLevel) {
                 for (ServerPlayer serverPlayer : serverLevel.getServer().getPlayerList().getPlayers()) {
-                    serverPlayer.connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.GUARDIAN_ELDER_EFFECT, 0f));
+                    serverPlayer.connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.GUARDIAN_ELDER_EFFECT, 1f));
                 }
             }
             player.getCooldowns().addCooldown(itemStack, 20);
