@@ -31,7 +31,8 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modImplementation files("run/mods/strangeitems-1.5.0.jar")
+	modImplementation files("dep/strangeitems-1.5.0.jar")
+	include files("dep/strangeitems-1.5.0.jar")
 	//modImplementation include("eu.pb4:sgui:1.6.0+1.21")
 	
 }

@@ -110,14 +110,12 @@ public final class PooSMPCommands {
             .then(Commands.argument("message", ComponentArgument.textComponent(registryAccess))
             .executes(commandContext -> {
                 List<ServerPlayer> players = commandContext.getSource().getServer().getPlayerList().getPlayers();
-                int receivers = 0;
 
                 for (ServerPlayer serverPlayer : players) {
                     serverPlayer.sendSystemMessage(ComponentArgument.getResolvedComponent(commandContext, "message", serverPlayer), false);
-                    receivers++;
                 }
 
-                return receivers;
+                return players.size();
             })
         ));
     }
