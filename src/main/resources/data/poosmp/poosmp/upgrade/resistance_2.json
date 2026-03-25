@@ -1,12 +1,12 @@
 {
-  "icon": "minecraft:water_bucket",
+  "icon": "minecraft:shield",
   "price": {
-    "base_price": 100
+    "base_price": 120
   },
   "max_purchases": 1,
   "status_effect": {
-    "id": "minecraft:water_breathing",
-    "amplifier": 0,
+    "id": "minecraft:resistance",
+    "amplifier": 1,
     "duration": -1,
     "show_particles": false,
     "show_icon": true,

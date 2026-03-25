@@ -2,6 +2,7 @@ package embin.poosmp;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import embin.poosmp.items.PooSMPItems;
 import embin.poosmp.items.component.PooSMPItemComponents;
@@ -81,19 +82,21 @@ public final class PooSMPCommands {
                 } else playerName = uuid.toString(); // fallback to player's uuid
 
                 String message = index[0] + ": " + playerName + " > " + formattedBalance;
-                context.getSource().sendSuccess(() -> Component.literal(message).withStyle(ChatFormatting.GOLD), false);
+                if (context.getSource().getPlayer() != null)
+                    context.getSource().getPlayer().sendSystemMessage(Component.literal(message).withStyle(ChatFormatting.GOLD));
                 index[0]++;
             });
             return Command.SINGLE_SUCCESS;
         }));
 
         // convert balance to money items
-        dispatcher.register(Commands.literal("getmoney1").executes(context -> getMoneyItem(context.getSource(), PooSMPItems.ONE_DOLLAR_BILL)));
-        dispatcher.register(Commands.literal("getmoney2").executes(context -> getMoneyItem(context.getSource(), PooSMPItems.TWO_DOLLAR_BILL)));
-        dispatcher.register(Commands.literal("getmoney10").executes(context -> getMoneyItem(context.getSource(), PooSMPItems.TEN_DOLLAR_BILL)));
-        dispatcher.register(Commands.literal("getmoney25").executes(context -> getMoneyItem(context.getSource(), PooSMPItems.TWENTY_FIVE_DOLLAR_BILL)));
-        dispatcher.register(Commands.literal("getmoney50").executes(context -> getMoneyItem(context.getSource(), PooSMPItems.FIFTY_DOLLAR_BILL)));
-        dispatcher.register(Commands.literal("getmoney100").executes(context -> getMoneyItem(context.getSource(), PooSMPItems.HUNDRED_DOLLAR_BILL)));
+        registerMoneyCommand(dispatcher, "getmoney1", PooSMPItems.ONE_DOLLAR_BILL);
+        registerMoneyCommand(dispatcher, "getmoney2", PooSMPItems.TWO_DOLLAR_BILL);
+        registerMoneyCommand(dispatcher, "getmoney5", PooSMPItems.FIVE_DOLLAR_BILL);
+        registerMoneyCommand(dispatcher, "getmoney10", PooSMPItems.TEN_DOLLAR_BILL);
+        registerMoneyCommand(dispatcher, "getmoney25", PooSMPItems.TWENTY_FIVE_DOLLAR_BILL);
+        registerMoneyCommand(dispatcher, "getmoney50", PooSMPItems.FIFTY_DOLLAR_BILL);
+        registerMoneyCommand(dispatcher, "getmoney100", PooSMPItems.HUNDRED_DOLLAR_BILL);
 
         // death count
         dispatcher.register(Commands.literal("deathcount").executes(context -> {
@@ -120,6 +123,21 @@ public final class PooSMPCommands {
         ));
     }
 
+    public static void registerMoneyCommand(CommandDispatcher<CommandSourceStack> dispatcher, String name, Item moneyItem) {
+        var com = Commands.literal(name).executes(c -> getMoneyItem(c.getSource(), moneyItem));
+        dispatcher.register(com.then(Commands.argument("amount", IntegerArgumentType.integer(1, 99)).executes(context -> {
+            final int amount = IntegerArgumentType.getInteger(context, "amount");
+            int remaining = amount;
+            while (remaining > 0) {
+                int result = getMoneyItem(context.getSource(), moneyItem);
+                remaining--;
+                if (result < 1)
+                    return result;
+            }
+            return amount;
+        })));
+    }
+
     @SuppressWarnings("DataFlowIssue")
     private static int getMoneyItem(CommandSourceStack context, Item moneyItem) {
         ItemStack moneyStack = moneyItem.getDefaultInstance();
@@ -144,7 +162,9 @@ public final class PooSMPCommands {
     private static int tellDeathCount(CommandContext<CommandSourceStack> context, ServerPlayer player) {
         if (player == null) return 0;
         int deaths = player.getStats().getValue(Stats.CUSTOM.get(Stats.DEATHS));
-        context.getSource().sendSuccess(() -> Component.literal(player.getPlainTextName() + " has died " + deaths + " time(s)."), false);
+        ServerPlayer asker = context.getSource().getPlayer();
+        if (asker != null)
+            asker.sendSystemMessage(Component.literal(player.getPlainTextName() + " has died " + deaths + " time(s)."));
         return deaths;
     }
 }

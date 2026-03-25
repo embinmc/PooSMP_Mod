@@ -151,5 +151,7 @@
   "upgrade.poosmp.mining_speed_increase": "Mining Speed Upgrade",
   "item.poosmp.null_stick": "Null Stick",
   "item.poosmp.jumpscare_stick": "Jumpscare Stick",
-  "biome.poosmp.slenderman_land": "Slenderman Land"
+  "biome.poosmp.slenderman_land": "Slenderman Land",
+  "item.poosmp.fun_stick": "Fun Stick",
+  "upgrade.poosmp.resistance_2": "Resistance II"
 }

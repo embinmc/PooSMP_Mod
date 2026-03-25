@@ -3,6 +3,7 @@ package embin.poosmp.items;
 import embin.poosmp.items.component.PooSMPItemComponents;
 import embin.poosmp.util.Id;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.network.protocol.game.ClientboundOpenScreenPacket;
@@ -13,6 +14,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.UseCooldown;
 import net.minecraft.world.level.Level;
 
 public final class ItemUses {
@@ -30,7 +32,10 @@ public final class ItemUses {
                     serverPlayer.connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.GUARDIAN_ELDER_EFFECT, 1f));
                 }
             }
-            player.getCooldowns().addCooldown(itemStack, 20);
+            if (itemStack.has(DataComponents.USE_COOLDOWN)) {
+                UseCooldown useCooldown = itemStack.get(DataComponents.USE_COOLDOWN);
+                useCooldown.apply(itemStack, player);
+            }
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
@@ -58,7 +63,10 @@ public final class ItemUses {
                     }
                 }
             }
-            player.getCooldowns().addCooldown(itemStack, 20);
+            if (itemStack.has(DataComponents.USE_COOLDOWN)) {
+                UseCooldown useCooldown = itemStack.get(DataComponents.USE_COOLDOWN);
+                useCooldown.apply(itemStack, player);
+            }
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;

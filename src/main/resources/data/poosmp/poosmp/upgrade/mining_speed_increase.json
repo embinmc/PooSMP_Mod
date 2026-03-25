@@ -1,8 +1,8 @@
 {
   "icon": "minecraft:iron_pickaxe",
   "price": {
-    "base_price": 40,
-    "price_increase_base": 20
+    "base_price": 30,
+    "price_increase_base": 5
   },
   "max_purchases": 20,
   "attribute_modifiers": [

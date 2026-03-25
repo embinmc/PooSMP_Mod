@@ -35,6 +35,11 @@ public class UpgradesScreen extends OptionsSubScreen {
     }
 
     @Override
+    public boolean isPauseScreen() {
+        return false;
+    }
+
+    @Override
     protected void addOptions() {}
 
     @Override

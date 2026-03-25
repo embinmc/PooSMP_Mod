@@ -102,6 +102,7 @@ public final class PooSMPItemGroups {
                 entries.accept(PooSMPBlocks.RIGGED_STONE);
                 entries.accept(PooSMPItems.NULL_STICK);
                 entries.accept(PooSMPItems.JUMPSCARE_STICK);
+                entries.accept(PooSMPItems.FUN_STICK);
             })).build();
 
     public static final CreativeModeTab BIOME_STICKS = FabricItemGroup.builder()

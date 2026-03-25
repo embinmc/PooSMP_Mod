@@ -117,7 +117,8 @@ public class PooSMPItems {
     public static final Item MAGIC_DEVICE = register("magic_device", MagicDeviceItem::new, new Item.Properties().durability(160).attributes(magicDeviceAttributes(17.0F)).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true));
     public static final Item NULL_SHARD = register("null_shard", Rarity.EPIC);
     public static final Item NULL_STICK = warpStick("null_stick", PooSMPKeys.MISSINGNO);
-    public static final Item JUMPSCARE_STICK = register("jumpscare_stick", new Item.Properties().component(PooSMPItemComponents.JUMPSCARE_STICK, Unit.INSTANCE));
+    public static final Item JUMPSCARE_STICK = register("jumpscare_stick", new Item.Properties().component(PooSMPItemComponents.JUMPSCARE_STICK, Unit.INSTANCE).useCooldown(1f));
+    public static final Item FUN_STICK = register("fun_stick", new Item.Properties().component(PooSMPItemComponents.FUN_STICK, Unit.INSTANCE).useCooldown(1f));
 
     public static ItemStack getBiomeStickStack(String biome) {
         ItemStack stack = new ItemStack(BIOME_STICK);

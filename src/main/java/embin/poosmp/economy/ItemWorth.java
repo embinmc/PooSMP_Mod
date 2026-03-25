@@ -28,9 +28,9 @@ public final class ItemWorth {
         setPrice(c, ShopCategories.MATERIALS, PooSMPItems.DIAMOND_SHARD, 1.5, 1);
         setPrice(c, ShopCategories.MATERIALS, Items.COPPER_INGOT, 2.25);
         setPrice(c, ShopCategories.MATERIALS, Items.COPPER_NUGGET, 0.25);
-        setPrice(c, ShopCategories.NATURE, Items.GRASS_BLOCK, 0.3, 0.05);
-        setPrice(c, ShopCategories.NATURE, Items.DIRT, 0.2, 0.02);
-        setPrice(c, ShopCategories.NATURE, Items.STONE, 0.25, 0.03);
+        setPrice(c, ShopCategories.NATURE, Items.GRASS_BLOCK, 0.1, 0.05);
+        setPrice(c, ShopCategories.NATURE, Items.DIRT, 0.05, 0.02);
+        setPrice(c, ShopCategories.NATURE, Items.STONE, 0.1, 0.03);
         setPrice(c, ShopCategories.NATURE, Items.NETHERRACK, 0.55, 0.1);
         setPrice(c, ShopCategories.NATURE, Items.END_STONE, 1.5, 1);
         setPrice(c, ShopCategories.NATURE, Items.COBBLESTONE, 0.25, 0.03);
@@ -52,5 +52,7 @@ public final class ItemWorth {
         setPrice(c, ShopCategories.MATERIALS, Items.REDSTONE, 1);
         setPrice(c, ShopCategories.FOOD, Items.ROTTEN_FLESH, 0.06, 0.01);
         setPrice(c, ShopCategories.MATERIALS, Items.ECHO_SHARD, 64);
+        setPrice(c, ShopCategories.NATURE, Items.SAND, 0.1);
+        setPrice(c, ShopCategories.NATURE, Items.RED_SAND, 0.2);
     }
 }

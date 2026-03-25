@@ -1,7 +1,7 @@
 {
   "icon": "minecraft:ominous_trial_key",
   "price": {
-    "base_price": 100
+    "base_price": 64
   },
   "max_purchases": 1,
   "status_effect": {
