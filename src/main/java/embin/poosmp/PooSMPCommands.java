@@ -20,6 +20,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSources;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -121,6 +123,14 @@ public final class PooSMPCommands {
                 return players.size();
             })
         ));
+
+        dispatcher.register(Commands.literal("suicide").executes(context -> {
+            ServerPlayer player = context.getSource().getPlayerOrException();
+            ServerLevel level = context.getSource().getLevel();
+            player.sendSystemMessage(Component.literal("Attempting to KILL YOU!!!!!"));
+            player.hurtServer(context.getSource().getLevel(), level.damageSources().source(PooSMPMod.SUICIDE), Float.MAX_VALUE);
+            return 1;
+        }));
     }
 
     public static void registerMoneyCommand(CommandDispatcher<CommandSourceStack> dispatcher, String name, Item moneyItem) {

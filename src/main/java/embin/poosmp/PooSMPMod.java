@@ -17,6 +17,7 @@ import embin.strangeitems.event.ServerPlayerEvents;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -25,13 +26,18 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +47,8 @@ public class PooSMPMod implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static final boolean componentless_installed = FabricLoader.getInstance().isModLoaded("componentless");
 	public static final boolean SHOP_ENABLED = true; // not ready yet
+
+	public static final ResourceKey<DamageType> SUICIDE = ResourceKey.create(Registries.DAMAGE_TYPE, Id.of("suicide"));
 
 	@Override
 	public void onInitialize() {
@@ -84,12 +92,15 @@ public class PooSMPMod implements ModInitializer {
 			});
 		});
 
-        ServerPlayerEvents.ON_TICK.register(Id.of("on_tick"), serverPlayer -> {
-            if (serverPlayer.getRandom().nextIntBetweenInclusive(0, 3000) == 2) {
-                double x = serverPlayer.getX() + 8;
-                double y = serverPlayer.getY() + 3;
-                double z = serverPlayer.getZ() + 4;
-                SoundEvent soundEvent = switch (serverPlayer.getRandom().nextIntBetweenInclusive(0, 5)) {
+        ServerTickEvents.START_WORLD_TICK.register(Id.of("on_tick"), level -> {
+            if (level.getRandom().nextIntBetweenInclusive(0, 5000) == 2) {
+				ServerPlayer victim = level.getRandomPlayer();
+				if (victim == null)
+					return;
+                double x = victim.getX() + 8;
+                double y = victim.getY() + 3;
+                double z = victim.getZ() + 4;
+                SoundEvent soundEvent = switch (level.getRandom().nextIntBetweenInclusive(0, 5)) {
                     case 1 -> SoundEvents.GRAVEL_BREAK;
                     case 2 -> SoundEvents.SAND_BREAK;
                     case 3 -> SoundEvents.WOOD_BREAK;
@@ -97,19 +108,28 @@ public class PooSMPMod implements ModInitializer {
                     case 5 -> SoundEvents.NETHERRACK_BREAK;
                     default -> SoundEvents.STONE_BREAK;
                 };
-                if (soundEvent != null) serverPlayer.level().playSound(null, x, y, z, soundEvent, SoundSource.BLOCKS, 0.3f, 1f);
-                int BAT = serverPlayer.getRandom().nextIntBetweenInclusive(0, 50);
-                switch (BAT) {
-                    case 4 -> serverPlayer.sendSystemMessage(Component.literal("VpmNu06pT_o").withStyle(ChatFormatting.DARK_GRAY));
+                if (soundEvent != null) level.playSound(null, x, y, z, soundEvent, SoundSource.BLOCKS, 0.3f, 1f);
+                int bat = level.getRandom().nextIntBetweenInclusive(0, 50);
+                switch (bat) {
+					case 3 -> {
+						PlayerList playerList = level.getServer().getPlayerList();
+						playerList.broadcastSystemMessage(Component.literal("SUPER POOP EVENT: STARTING IN 16 YEARS!!!!!"), false);
+						level.getPlayers(LivingEntity::isAlive).forEach(player -> {
+							level.playSound(null, player.blockPosition(), SoundEvents.COW_DEATH, SoundSource.HOSTILE);
+							level.playSound(null, player.blockPosition(), SoundEvents.HORSE_DEATH, SoundSource.HOSTILE);
+							level.playSound(null, player.blockPosition(), SoundEvents.SHEEP_DEATH, SoundSource.HOSTILE);
+							level.playSound(null, player.blockPosition(), SoundEvents.VILLAGER_DEATH, SoundSource.HOSTILE);
+						});
+					}
+                    //case 4 -> level.sendSystemMessage(Component.literal("VpmNu06pT_o").withStyle(ChatFormatting.DARK_GRAY));
                     case 7, 8, 9 -> {
-                        Component message = serverPlayer.getDisplayName().copy().append(" has shit themselves.");
-                        PlayerList playerList = serverPlayer.level().getServer().getPlayerList();
+                        Component message = Component.translatable("poosmp.shit_self", victim.getDisplayName());
+                        PlayerList playerList = level.getServer().getPlayerList();
                         playerList.broadcastSystemMessage(message, false);
                     }
                     default -> {}
                 }
             }
-            return InteractionResult.PASS;
         });
 
 		if (PooSMPMod.SHOP_ENABLED) {
