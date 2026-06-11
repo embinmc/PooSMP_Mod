@@ -1,0 +1,10 @@
+{
+  "layers": {
+    "wings": [
+      {
+        "texture": "poosmp:netherite_elytra",
+        "use_player_texture": true
+      }
+    ]
+  }
+}

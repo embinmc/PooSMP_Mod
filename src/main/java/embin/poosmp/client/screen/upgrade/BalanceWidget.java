@@ -10,6 +10,7 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.CommonColors;
+import org.jspecify.annotations.NonNull;
 
 public class BalanceWidget extends AbstractWidget {
     public BalanceWidget(int x, int y) {
@@ -17,7 +18,7 @@ public class BalanceWidget extends AbstractWidget {
     }
 
     @Override
-    protected void renderWidget(GuiGraphics context, int mouseX, int mouseY, float delta) {
+    protected void renderWidget(@NonNull GuiGraphics context, int mouseX, int mouseY, float delta) {
         Minecraft minecraft = Minecraft.getInstance();
         PooSMPSavedData savedData = PooSMPSavedData.Client.INSTANCE;
         if (minecraft.player != null) {
@@ -27,6 +28,6 @@ public class BalanceWidget extends AbstractWidget {
     }
 
     @Override
-    protected void updateWidgetNarration(NarrationElementOutput builder) {
+    protected void updateWidgetNarration(@NonNull NarrationElementOutput builder) {
     }
 }

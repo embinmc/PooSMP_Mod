@@ -1,0 +1,11 @@
+{
+  "type": "poosmp:hyrule",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "poosmp:modified_overworld",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "poosmp:hyrule_castle"
+    }
+  }
+}

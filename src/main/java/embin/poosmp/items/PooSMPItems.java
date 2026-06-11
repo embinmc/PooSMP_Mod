@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -32,6 +33,8 @@ import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.EquipmentAssets;
+import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
@@ -119,6 +122,19 @@ public class PooSMPItems {
     public static final Item NULL_STICK = warpStick("null_stick", PooSMPKeys.MISSINGNO);
     public static final Item JUMPSCARE_STICK = register("jumpscare_stick", new Item.Properties().component(PooSMPItemComponents.JUMPSCARE_STICK, Unit.INSTANCE).useCooldown(1f));
     public static final Item FUN_STICK = register("fun_stick", new Item.Properties().component(PooSMPItemComponents.FUN_STICK, Unit.INSTANCE).useCooldown(1f));
+    public static final Item NETHERITE_ELYTRA = register("netherite_elytra", glider(EquipmentSlot.CHEST, "netherite_elytra").durability(1024).rarity(Rarity.EPIC).fireResistant());
+
+    public static Equippable createEquippableGlider(EquipmentSlot equipmentSlot, String equippmentAssetId) {
+        return Equippable.builder(equipmentSlot)
+                .setEquipSound(SoundEvents.ARMOR_EQUIP_ELYTRA)
+                .setAsset(ResourceKey.create(EquipmentAssets.ROOT_ID, Id.of(equippmentAssetId)))
+                .setDamageOnHurt(false)
+                .build();
+    }
+
+    public static Item.Properties glider(EquipmentSlot equipmentSlot, String equipmentAssetId) {
+        return new Item.Properties().component(DataComponents.GLIDER, Unit.INSTANCE).component(DataComponents.EQUIPPABLE, createEquippableGlider(equipmentSlot, equipmentAssetId));
+    }
 
     public static ItemStack getBiomeStickStack(String biome) {
         ItemStack stack = new ItemStack(BIOME_STICK);
