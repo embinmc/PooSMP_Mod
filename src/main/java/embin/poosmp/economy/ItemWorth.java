@@ -1,5 +1,6 @@
 package embin.poosmp.economy;
 
+import embin.poosmp.block.PooSMPBlocks;
 import embin.poosmp.economy.shop.ShopCategories;
 import embin.poosmp.economy.shop.ShopCategory;
 import embin.poosmp.items.PooSMPItems;
@@ -54,5 +55,6 @@ public final class ItemWorth {
         setPrice(c, ShopCategories.MATERIALS, Items.ECHO_SHARD, 64);
         setPrice(c, ShopCategories.NATURE, Items.SAND, 0.1);
         setPrice(c, ShopCategories.NATURE, Items.RED_SAND, 0.2);
+        setPrice(c, ShopCategories.MISC, PooSMPBlocks.SUS.asItem(), 1, 0.2);
     }
 }

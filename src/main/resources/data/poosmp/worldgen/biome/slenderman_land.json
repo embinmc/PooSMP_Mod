@@ -8,11 +8,6 @@
         "probability": 0.01
       }
     ],
-    "minecraft:gameplay/bed_rule": {
-      "can_set_spawn": "never",
-      "can_sleep": "never",
-      "explodes": true
-    },
     "minecraft:visual/sky_color": "#444444",
     "minecraft:visual/fog_color": "#666666",
     "minecraft:visual/water_fog_color": "#555555"

@@ -32,6 +32,7 @@ public class TradeConstructors {
             factories.add(((level, entity, random) -> new ToMoney(Items.SAND, 10, PooSMPItems.ONE_DOLLAR_BILL, 1).getOffer(level, entity, random)));
             factories.add(((level, entity, random) -> new ToMoney(Items.GRASS_BLOCK, 10, PooSMPItems.ONE_DOLLAR_BILL, 1).getOffer(level, entity, random)));
             factories.add(((level, entity, random) -> new ToMoney(Items.LAPIS_LAZULI, 1, PooSMPItems.ONE_DOLLAR_BILL, 1).getOffer(level, entity, random)));
+            factories.add(((level, entity, random) -> new ToMoney(Items.SUGAR_CANE, 12, PooSMPItems.ONE_DOLLAR_BILL, 1).getOffer(level, entity, random)));
         });
         TradeOfferHelper.registerVillagerOffers(PooSMPVillagers.BANKER_KEY, 2, factories -> {
             factories.add(((level, entity, random) -> new ToMoney(Items.RED_SAND, 5, PooSMPItems.ONE_DOLLAR_BILL, 1).getOffer(level, entity, random)));

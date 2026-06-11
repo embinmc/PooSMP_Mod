@@ -4,8 +4,45 @@
     "type": "minecraft:noise",
     "settings": "poosmp:modified_overworld",
     "biome_source": {
-      "type": "minecraft:fixed",
-      "biome": "poosmp:outer_hyrule"
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "poosmp:hyrule",
+          "parameters": {
+            "temperature": 0,
+            "humidity": 0,
+            "continentalness": 0,
+            "depth": 0,
+            "weirdness": 0,
+            "offset": 0,
+            "erosion": 0
+          }
+        },
+        {
+          "biome": "poosmp:sky_islands",
+          "parameters": {
+            "temperature": 0,
+            "humidity": 0,
+            "continentalness": 0,
+            "depth": 1,
+            "weirdness": 0,
+            "offset": 0,
+            "erosion": 0
+          }
+        },
+        {
+          "biome": "poosmp:depths",
+          "parameters": {
+            "temperature": 0,
+            "humidity": 0,
+            "continentalness": 0,
+            "depth": -1,
+            "weirdness": 0,
+            "offset": 0,
+            "erosion": 0
+          }
+        }
+      ]
     }
   }
 }

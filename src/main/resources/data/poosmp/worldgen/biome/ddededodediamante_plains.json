@@ -8,11 +8,6 @@
         "probability": 0.01
       }
     ],
-    "minecraft:gameplay/bed_rule": {
-      "can_set_spawn": "never",
-      "can_sleep": "never",
-      "explodes": true
-    },
     "minecraft:audio/background_music": {
       "default": {
         "max_delay": 60,

@@ -52,7 +52,21 @@
       "shift_y": 0,
       "shift_z": "minecraft:shift_z"
     },
-    "depth": 0.6,
+    "depth": {
+      "type": "minecraft:range_choice",
+      "input": "minecraft:y",
+      "min_inclusive": -128,
+      "max_exclusive": 0,
+      "when_in_range": -1,
+      "when_out_of_range": {
+        "type": "minecraft:range_choice",
+        "input": "minecraft:y",
+        "min_inclusive": 380,
+        "max_exclusive": 512,
+        "when_in_range": 1,
+        "when_out_of_range": 0
+      }
+    },
     "ridges": "minecraft:overworld/ridges",
     "preliminary_surface_level": {
       "type": "minecraft:find_top_surface",
