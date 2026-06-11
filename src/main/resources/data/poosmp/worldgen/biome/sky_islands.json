@@ -15,7 +15,6 @@
         "sound": "minecraft:music.credits"
       }
     },
-    "minecraft:visual/cloud_height": 480.0,
     "minecraft:visual/sky_color": "#c9ddfd",
     "minecraft:visual/fog_color": "#c3d4ee",
     "minecraft:visual/water_fog_color": "#050533"

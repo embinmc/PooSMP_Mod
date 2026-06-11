@@ -16,6 +16,7 @@
         "probability": 0.01
       }
     ],
+    "minecraft:visual/cloud_height": 450.0,
     "minecraft:visual/sky_color": "#9b3326",
     "minecraft:visual/fog_color": "#6b241b",
     "minecraft:visual/fog_start_distance": 12.0,
