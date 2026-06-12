@@ -1,0 +1,60 @@
+{
+  "type": "poosmp:dimworld",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "poosmp:modified_overworld",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "poosmp:dimworld_surface",
+          "parameters": {
+            "temperature": 0,
+            "humidity": 0,
+            "continentalness": 0,
+            "depth": 0,
+            "weirdness": 0,
+            "offset": 0,
+            "erosion": 0
+          }
+        },
+        {
+          "biome": "poosmp:dimworld_sky",
+          "parameters": {
+            "temperature": 0,
+            "humidity": 0,
+            "continentalness": 0,
+            "depth": 1,
+            "weirdness": 0,
+            "offset": 0,
+            "erosion": 0
+          }
+        },
+        {
+          "biome": "poosmp:dimworld_depths",
+          "parameters": {
+            "temperature": 0,
+            "humidity": 0,
+            "continentalness": 0,
+            "depth": -1,
+            "weirdness": 0,
+            "offset": 0,
+            "erosion": 0
+          }
+        },
+        {
+          "biome": "poosmp:gloomy_meadows",
+          "parameters": {
+            "temperature": 0,
+            "humidity": 0,
+            "continentalness": 0.4,
+            "depth": 0,
+            "weirdness": 0,
+            "offset": 0.2,
+            "erosion": 0.4
+          }
+        }
+      ]
+    }
+  }
+}

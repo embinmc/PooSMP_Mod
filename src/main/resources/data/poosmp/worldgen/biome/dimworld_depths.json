@@ -1,0 +1,53 @@
+{
+  "temperature": 0.8,
+  "downfall": 0.5,
+  "has_precipitation": false,
+  "effects": {
+    "water_color": "#553344",
+    "grass_color": "#553344",
+    "foliage_color": "#553344"
+  },
+  "attributes": {
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "minecraft:copper_fire_flame"
+        },
+        "probability": 0.0004
+      },
+      {
+        "particle": {
+          "type": "minecraft:firefly"
+        },
+        "probability": 0.006
+      }
+    ],
+    "minecraft:visual/fog_color": "#2f0f16",
+    "minecraft:visual/fog_start_distance": 8.0,
+    "minecraft:visual/fog_end_distance": 240.0,
+    "minecraft:visual/water_fog_color": "#adadad"
+  },
+  "spawners": {},
+  "spawn_costs": {},
+  "carvers": [],
+  "features": [
+    [],
+    [],
+    [],
+    [
+      "minecraft:monster_room",
+      "minecraft:monster_room_deep"
+    ],
+    [],
+    [],
+    [
+      "minecraft:disk_sand",
+      "minecraft:disk_clay",
+      "minecraft:disk_gravel"
+    ],
+    [],
+    [],
+    [],
+    []
+  ]
+}

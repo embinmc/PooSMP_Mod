@@ -157,5 +157,6 @@
   "poosmp.shit_self": "%s has shit themselves",
   "death.attack.poosmp.suicide": "%s killed themselves #LMAO",
   "death.attack.poosmp.suicide.player": "%s killed themselves and changed the trajectory of %s's life forever",
-  "upgrade.poosmp.strength_2": "Strength II"
+  "upgrade.poosmp.strength_2": "Strength II",
+  "item.poosmp.dimworld_stick": "Gloomy Stick"
 }

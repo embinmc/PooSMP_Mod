@@ -452,7 +452,7 @@
                           "if_true": {
                             "type": "minecraft:biome",
                             "biome_is": [
-                              "minecraft:windswept_gravelly_hills"
+                              "poosmp:gloomy_meadows"
                             ]
                           },
                           "then_run": {
@@ -505,7 +505,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "minecraft:pale_moss_block"
                                   }
                                 }
                               },
@@ -834,7 +834,7 @@
                           "if_true": {
                             "type": "minecraft:biome",
                             "biome_is": [
-                              "minecraft:windswept_gravelly_hills"
+                              "poosmp:gloomy_meadows"
                             ]
                           },
                           "then_run": {

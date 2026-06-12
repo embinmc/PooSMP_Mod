@@ -10,6 +10,7 @@ public final class PooSMPKeys {
     public static final ResourceKey<Upgrade> HEALTH_INCREASE = upgrade("health_increase");
     public static final ResourceKey<Level> HYRULE = dimension("hyrule");
     public static final ResourceKey<Level> MISSINGNO = dimension("missingno");
+    public static final ResourceKey<Level> DIMWORLD = dimension("dimworld");
 
     public static ResourceKey<Upgrade> upgrade(String id) {
         return ResourceKey.create(PooSMPRegistries.Keys.UPGRADE, Id.of(id));

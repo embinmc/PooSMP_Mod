@@ -1,0 +1,63 @@
+{
+  "temperature": 0.8,
+  "downfall": 0.5,
+  "has_precipitation": false,
+  "effects": {
+    "water_color": "#555566",
+    "grass_color": "#555566",
+    "foliage_color": "#555566"
+  },
+  "attributes": {
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "minecraft:copper_fire_flame"
+        },
+        "probability": 0.0006
+      },
+      {
+        "particle": {
+          "type": "minecraft:firefly"
+        },
+        "probability": 0.001
+      }
+    ],
+    "minecraft:visual/sky_color": "#335544",
+    "minecraft:visual/fog_color": "#1f1f26",
+    "minecraft:visual/fog_start_distance": 8.0,
+    "minecraft:visual/fog_end_distance": 240.0,
+    "minecraft:visual/water_fog_color": "#adadad"
+  },
+  "spawners": {},
+  "spawn_costs": {},
+  "carvers": [],
+  "features": [
+    [],
+    [],
+    [],
+    [
+      "minecraft:monster_room",
+      "minecraft:monster_room_deep"
+    ],
+    [],
+    [],
+    [
+      "minecraft:disk_sand",
+      "minecraft:disk_clay",
+      "minecraft:disk_gravel"
+    ],
+    [],
+    [],
+    [
+      "minecraft:patch_grass_badlands",
+      "minecraft:patch_dry_grass_badlands",
+      "minecraft:patch_dead_bush_badlands",
+      "minecraft:patch_sugar_cane_badlands",
+      "minecraft:patch_pumpkin",
+      "minecraft:patch_firefly_bush_near_water"
+    ],
+    [
+      "minecraft:freeze_top_layer"
+    ]
+  ]
+}
