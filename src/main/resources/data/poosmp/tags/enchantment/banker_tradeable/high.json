@@ -1,0 +1,11 @@
+{
+  "values": [
+    "poosmp:melee_protection",
+    "minecraft:unbreaking",
+    "minecraft:mending",
+    "minecraft:swift_sneak",
+    "minecraft:wind_burst",
+    "minecraft:sharpness",
+    "minecraft:looting"
+  ]
+}

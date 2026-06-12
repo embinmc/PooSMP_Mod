@@ -36,7 +36,9 @@ public class PooSMPTags {
             return TagKey.create(Registries.ENCHANTMENT, Id.of(name));
         }
 
-        public static final TagKey<Enchantment> BANKER_TRADEABLE = createTag("poosmp:banker_tradeable");
+        public static final TagKey<Enchantment> BANKER_TRADEABLE_LOW = createTag("banker_tradeable/low");
+        public static final TagKey<Enchantment> BANKER_TRADEABLE_MID = createTag("banker_tradeable/mid");
+        public static final TagKey<Enchantment> BANKER_TRADEABLE_HIGH = createTag("banker_tradeable/high");
     }
 
     public static class PaintingVariants {

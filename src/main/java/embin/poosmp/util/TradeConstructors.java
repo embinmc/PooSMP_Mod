@@ -5,9 +5,7 @@ import embin.poosmp.items.PooSMPItems;
 import embin.poosmp.villager.PooSMPVillagers;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
@@ -20,12 +18,17 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.ItemLike;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Optional;
+
+import static embin.poosmp.util.PooSMPTags.Enchantments.BANKER_TRADEABLE_LOW;
+import static embin.poosmp.util.PooSMPTags.Enchantments.BANKER_TRADEABLE_MID;
+import static embin.poosmp.util.PooSMPTags.Enchantments.BANKER_TRADEABLE_HIGH;
 
 public class TradeConstructors {
 
@@ -46,10 +49,11 @@ public class TradeConstructors {
             factories.add(trade(Items.GOLD_INGOT, 2, PooSMPItems.ONE_DOLLAR_BILL, 17));
             factories.add(trade(Items.DIAMOND, 1, PooSMPItems.ONE_DOLLAR_BILL, 18));
             factories.add(trade(Items.ECHO_SHARD, 1, PooSMPItems.ONE_DOLLAR_BILL, 64));
+            factories.add(enchantedBook(BANKER_TRADEABLE_LOW, PooSMPItems.TWENTY_FIVE_DOLLAR_BILL, 2));
         });
         TradeOfferHelper.registerVillagerOffers(PooSMPVillagers.BANKER_KEY, 4, factories -> {
             factories.add(trade(Items.NETHERITE_SCRAP, 1, PooSMPItems.HUNDRED_DOLLAR_BILL, 4));
-            factories.add(enchantedBook(PooSMPTags.Enchantments.BANKER_TRADEABLE, PooSMPItems.HUNDRED_DOLLAR_BILL, 3));
+            factories.add(enchantedBook(BANKER_TRADEABLE_MID, PooSMPItems.HUNDRED_DOLLAR_BILL, 1));
             factories.add(trade(PooSMPBlocks.DRAGON_ANNOYANCE, 8, PooSMPItems.FIVE_DOLLAR_BILL, 3));
         });
         TradeOfferHelper.registerVillagerOffers(PooSMPVillagers.BANKER_KEY, 5, factories -> {
@@ -57,6 +61,7 @@ public class TradeConstructors {
             factories.add(trade(PooSMPItems.RAW_RED_POO, 1, PooSMPItems.HUNDRED_DOLLAR_BILL, 64));
             factories.add(trade(PooSMPItems.RED_POO_UPGRADE_SMITHING_TEMPLATE, 1, PooSMPItems.HUNDRED_DOLLAR_BILL, 10));
             factories.add(trade(PooSMPBlocks.DDEDEDODEDIAMANTE_BLOCK, 16, PooSMPItems.TEN_DOLLAR_BILL, 2));
+            factories.add(enchantedBook(BANKER_TRADEABLE_HIGH, PooSMPItems.HUNDRED_DOLLAR_BILL, 4));
         });
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 5, factories -> {
             factories.add(trade(Items.SHULKER_SHELL, 2, PooSMPItems.HUNDRED_DOLLAR_BILL, 1));
@@ -84,7 +89,9 @@ public class TradeConstructors {
         return (level, entity, random) -> {
             Optional<Holder<Enchantment>> enchantment = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getRandomElementOf(tag, random);
             if (enchantment.isPresent()) {
-                final int maxLevel = enchantment.orElseThrow().value().getMaxLevel();
+                Holder<Enchantment> holder = enchantment.orElseThrow();
+                boolean shouldBe1Less = holder.is(Enchantments.EFFICIENCY) && random.nextBoolean();
+                final int maxLevel = shouldBe1Less ? holder.value().getMaxLevel() - 1 : holder.value().getMaxLevel();
                 return new ToMoney(
                         EnchantmentHelper.createBook(new EnchantmentInstance(enchantment.orElseThrow(), maxLevel)),
                         cost, costAmount
@@ -100,6 +107,7 @@ public class TradeConstructors {
         ItemStack get(ServerLevel level, Entity entity, RandomSource random);
     }
 
+    @Deprecated
     public static class ToMoney implements VillagerTrades.ItemListing {
         private final ItemCost stack;
         private final int max_uses;
@@ -129,38 +137,6 @@ public class TradeConstructors {
 
         public ToMoney(ItemStack item, ItemLike sell_price, int amount2) {
             this(new ItemCost(sell_price.asItem(), amount2), item);
-        }
-
-        @Override
-        public @Nullable MerchantOffer getOffer(ServerLevel serverLevel, Entity entity, RandomSource randomSource) {
-            return new MerchantOffer(this.stack, this.price, this.max_uses, this.experience, this.multiplier);
-        }
-    }
-    public static class FromMoney implements VillagerTrades.ItemListing {
-        private final ItemCost stack;
-        private final int max_uses;
-        private final int experience;
-        private final ItemStack price;
-        private final float multiplier;
-
-        public FromMoney(ItemCost stack, ItemStack price) {
-            this.stack = stack;
-            this.max_uses = 999999;
-            this.experience = 20;
-            this.price = price;
-            this.multiplier = 0.05F;
-        }
-
-        public FromMoney(ItemLike item, ItemLike buy_price) {
-            this(new ItemCost(item.asItem(), 1), new ItemStack(buy_price));
-        }
-
-        public FromMoney(ItemLike item, int amount, ItemLike buy_price) {
-            this(new ItemCost(item.asItem(), amount), new ItemStack(buy_price));
-        }
-
-        public FromMoney(ItemLike item, int amount, ItemLike buy_price, int amount2) {
-            this(new ItemCost(item.asItem(), amount), new ItemStack(buy_price, amount2));
         }
 
         @Override
