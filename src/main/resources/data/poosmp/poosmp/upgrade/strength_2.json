@@ -1,11 +1,11 @@
 {
-  "icon": "minecraft:shield",
+  "icon": "minecraft:netherite_sword",
   "price": {
     "base_price": 150
   },
   "max_purchases": 1,
   "status_effect": {
-    "id": "minecraft:resistance",
+    "id": "minecraft:strength",
     "amplifier": 1,
     "duration": -1,
     "show_particles": false,
