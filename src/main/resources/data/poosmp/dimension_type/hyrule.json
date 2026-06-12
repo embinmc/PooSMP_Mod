@@ -2,7 +2,6 @@
   "coordinate_scale": 1.0,
   "ambient_light": 0.0,
   "logical_height": 640,
-  "effects": "minecraft:overworld",
   "infiniburn": "#minecraft:infiniburn_overworld",
   "min_y": -128,
   "height": 640,
@@ -17,16 +16,24 @@
   "attributes": {
     "minecraft:gameplay/bed_rule": {
       "can_set_spawn": "always",
-      "can_sleep": "when_dark",
+      "can_sleep": "never",
       "error_message": {
-        "translate": "block.minecraft.bed.no_sleep"
+        "text": "You may not sleep in this dimension (BLAME MOJANG)",
+        "color": "red"
       }
     },
     "minecraft:visual/cloud_height": 360.0,
     "minecraft:visual/cloud_color": "#ccffffff",
     "minecraft:visual/fog_color": "#c0d8ff",
     "minecraft:visual/sky_color": "#9ebcf5",
-    "minecraft:gameplay/respawn_anchor_works": true
+    "minecraft:gameplay/respawn_anchor_works": true,
+    "minecraft:gameplay/villager_activity": "minecraft:work",
+    "minecraft:gameplay/baby_villager_activity": "minecraft:play",
+    "minecraft:gameplay/creaking_active": true,
+    "minecraft:gameplay/can_pillager_patrol_spawn": false,
+    "minecraft:gameplay/monsters_burn": false
   },
-  "timelines": "#minecraft:in_overworld"
+  "timelines": "#poosmp:in_hyrule",
+  "cardinal_light": "default",
+  "skybox": "overworld"
 }
