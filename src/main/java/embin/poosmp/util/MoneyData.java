@@ -2,6 +2,7 @@ package embin.poosmp.util;
 
 import net.minecraft.nbt.CompoundTag;
 
+@Deprecated(forRemoval = true)
 public class MoneyData {
     public static int add_money(IEntityDataSaver player, int amount) {
         CompoundTag nbt = player.poosmpmod$getPersistentData();
