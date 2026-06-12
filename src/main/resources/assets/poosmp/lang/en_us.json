@@ -155,5 +155,7 @@
   "item.poosmp.fun_stick": "Fun Stick",
   "upgrade.poosmp.resistance_2": "Resistance II",
   "poosmp.shit_self": "%s has shit themselves",
-  "death.attack.poosmp.suicide": "%s killed themselves #LMAO"
+  "death.attack.poosmp.suicide": "%s killed themselves #LMAO",
+  "death.attack.poosmp.suicide.player": "%s killed themselves and changed the trajectory of %s's life forever",
+  "upgrade.poosmp.strength_2": "Strength II"
 }

@@ -1,7 +1,8 @@
 {
   "anvil_cost": 4,
   "description": {
-    "translate": "enchantment.poosmp.melee_protection"
+    "text": "Melee Protection",
+    "color": "#ff6600"
   },
   "effects": {
     "minecraft:damage_protection": [
