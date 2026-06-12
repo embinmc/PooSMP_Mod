@@ -13,17 +13,20 @@ import embin.poosmp.villager.PooSMPPoi;
 import embin.poosmp.villager.PooSMPVillagers;
 import embin.poosmp.world.PooSMPGameRules;
 import embin.poosmp.world.PooSMPRegistries;
-import embin.strangeitems.event.ServerPlayerEvents;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.biome.v1.BiomeModification;
+import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.fabricmc.fabric.impl.biome.modification.BiomeModificationImpl;
 import net.fabricmc.fabric.impl.item.ComponentTooltipAppenderRegistryImpl;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -35,12 +38,24 @@ import net.minecraft.server.players.PlayerList;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.util.TriState;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntry;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
+import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 public class PooSMPMod implements ModInitializer {
 	public static final String MOD_ID = "poosmp";
@@ -93,7 +108,7 @@ public class PooSMPMod implements ModInitializer {
 		});
 
         ServerTickEvents.START_WORLD_TICK.register(Id.of("on_tick"), level -> {
-            if (level.getRandom().nextIntBetweenInclusive(0, 5000) == 2) {
+            if (level.getRandom().nextIntBetweenInclusive(0, 6000) == 2) {
 				ServerPlayer victim = level.getRandomPlayer();
 				if (victim == null)
 					return;
@@ -108,13 +123,14 @@ public class PooSMPMod implements ModInitializer {
                     case 5 -> SoundEvents.NETHERRACK_BREAK;
                     default -> SoundEvents.STONE_BREAK;
                 };
-                if (soundEvent != null) level.playSound(null, x, y, z, soundEvent, SoundSource.BLOCKS, 0.3f, 1f);
-                int bat = level.getRandom().nextIntBetweenInclusive(0, 50);
+                level.playSound(null, x, y, z, soundEvent, SoundSource.BLOCKS, 0.3f, 1f);
+                int bat = level.getRandom().nextIntBetweenInclusive(0, 80);
                 switch (bat) {
 					case 3 -> {
 						PlayerList playerList = level.getServer().getPlayerList();
-						playerList.broadcastSystemMessage(Component.literal("SUPER POOP EVENT: STARTING IN 16 YEARS!!!!!"), false);
+						playerList.broadcastSystemMessage(Component.literal("SUPER POOP EVENT: STARTING IN 84 YEARS!!!!!"), false);
 						level.getPlayers(LivingEntity::isAlive).forEach(player -> {
+							player.giveExperiencePoints(4000);
 							level.playSound(null, player.blockPosition(), SoundEvents.COW_DEATH, SoundSource.HOSTILE);
 							level.playSound(null, player.blockPosition(), SoundEvents.HORSE_DEATH, SoundSource.HOSTILE);
 							level.playSound(null, player.blockPosition(), SoundEvents.SHEEP_DEATH, SoundSource.HOSTILE);
@@ -122,7 +138,7 @@ public class PooSMPMod implements ModInitializer {
 						});
 					}
                     //case 4 -> level.sendSystemMessage(Component.literal("VpmNu06pT_o").withStyle(ChatFormatting.DARK_GRAY));
-                    case 7, 8, 9 -> {
+                    case 7, 8, 9, 44 -> {
                         Component message = Component.translatable("poosmp.shit_self", victim.getDisplayName());
                         PlayerList playerList = level.getServer().getPlayerList();
                         playerList.broadcastSystemMessage(message, false);
@@ -133,8 +149,16 @@ public class PooSMPMod implements ModInitializer {
         });
 
 		if (PooSMPMod.SHOP_ENABLED) {
-			DefaultItemComponentEvents.MODIFY.register(Id.of("poosmp:set_item_prices"), ItemWorth::setPrices);
+			DefaultItemComponentEvents.MODIFY.register(Id.of("set_item_prices"), ItemWorth::setPrices);
 		}
+
+		LootTableEvents.MODIFY_DROPS.register(Id.of("dim"), (entry, context, drops) -> {
+			if (entry.is(BuiltInLootTables.SIMPLE_DUNGEON) || entry.is(BuiltInLootTables.ANCIENT_CITY_ICE_BOX)) {
+				ItemStack itemStack = new ItemStack(PooSMPItems.DIMWORLD_STICK);
+				itemStack.remove(PooSMPItemComponents.FROM_CREATIVE);
+				drops.add(itemStack);
+			}
+		});
 
 		LOGGER.info("im all pooped up");
 	}
