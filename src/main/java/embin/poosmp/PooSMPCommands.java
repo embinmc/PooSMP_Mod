@@ -1,5 +1,6 @@
 package embin.poosmp;
 
+import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
@@ -7,6 +8,9 @@ import com.mojang.brigadier.context.CommandContext;
 import embin.poosmp.items.PooSMPItems;
 import embin.poosmp.items.component.PooSMPItemComponents;
 import embin.poosmp.items.component.ValueComponent;
+import embin.poosmp.util.PooNameCache;
+import embin.poosmp.util.PooPlayerList;
+import embin.poosmp.util.PooUtil;
 import embin.poosmp.world.PooSMPSavedData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandBuildContext;
@@ -14,22 +18,29 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.ComponentArgument;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.commands.arguments.GameProfileArgument;
+import net.minecraft.core.UUIDUtil;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentUtils;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.players.NameAndId;
+import net.minecraft.server.players.PlayerList;
+import net.minecraft.stats.ServerStatsCounter;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 import java.text.NumberFormat;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public final class PooSMPCommands {
     private PooSMPCommands() {}
@@ -72,11 +83,16 @@ public final class PooSMPCommands {
                 context.getSource().sendFailure(Component.literal("Everybody is broke"));
                 return 0;
             }
+            var nf = NumberFormat.getCurrencyInstance(Locale.US);
             final int[] index = {1};
-            savedData.balance.keySet().stream().sorted(Comparator.comparingDouble(k -> savedData.balance.get(k))).forEach(uuid -> {
+            final double[] totalMoney = {0D};
+            savedData.balance.values().forEach(d -> totalMoney[0] += d);
+            if (context.getSource().getPlayer() != null)
+                context.getSource().getPlayer().sendSystemMessage(Component.literal("Total money: " + nf.format(totalMoney[0])).withStyle(ChatFormatting.GOLD));
+            savedData.balance.keySet().stream().sorted(Comparator.comparingDouble(k -> savedData.balance.get(k)).reversed()).forEach(uuid -> {
                 double balance = savedData.balance.get(uuid);
                 ServerPlayer player = server.getPlayerList().getPlayer(uuid);
-                String formattedBalance = NumberFormat.getCurrencyInstance(Locale.US).format(balance);
+                String formattedBalance = nf.format(balance);
 
                 String playerName;
                 if (player != null) {
@@ -85,7 +101,7 @@ public final class PooSMPCommands {
                     playerName = savedData.getPlayerName(uuid).orElseThrow();
                 } else playerName = uuid.toString(); // fallback to player's uuid
 
-                String message = index[0] + ": " + playerName + " > " + formattedBalance;
+                String message = index[0] + ": " + playerName + " -> " + formattedBalance;
                 if (context.getSource().getPlayer() != null)
                     context.getSource().getPlayer().sendSystemMessage(Component.literal(message).withStyle(ChatFormatting.GOLD));
                 index[0]++;
@@ -105,10 +121,39 @@ public final class PooSMPCommands {
         // death count
         dispatcher.register(Commands.literal("deathcount").executes(context -> {
             ServerPlayer player = context.getSource().getPlayer();
-            return tellDeathCount(context, player);
-        }).then(Commands.argument("target", EntityArgument.player()).executes(context -> {
-            ServerPlayer player = EntityArgument.getPlayer(context, "target");
-            return tellDeathCount(context, player);
+            if (player == null)
+                return -5;
+            int deaths = getDeathCount(context, player.nameAndId());
+            player.sendSystemMessage(Component.literal("You have died " + deaths + " time(s)."));
+            return deaths;
+        }).then(Commands.literal("list").executes(context -> {
+            ServerPlayer asker = context.getSource().getPlayer();
+            if (asker == null)
+                return -5;
+            MinecraftServer server = context.getSource().getServer();
+            if (!(server.services().nameToIdCache() instanceof PooNameCache pooNameCache)) {
+                context.getSource().sendFailure(Component.literal("Couldn't fetch death counts").withStyle(ChatFormatting.RED));
+                return -10;
+            }
+            Collection<NameAndId> cache = pooNameCache.poosmp$getCachedNames();
+            Map<NameAndId, Integer> deathCounts = HashMap.newHashMap(cache.size());
+            int totalDeaths = 0;
+            for (NameAndId player : cache) {
+                int result = getDeathCount(context, player);
+                if (result < 0)
+                    continue;
+                deathCounts.put(player, result);
+                totalDeaths += result;
+            }
+            final int[] index = {1};
+            asker.sendSystemMessage(Component.literal("Total deaths: " + totalDeaths));
+            deathCounts.keySet().stream().sorted(Comparator.comparingInt(deathCounts::get)).forEach(nameAndId -> {
+                int deaths = deathCounts.get(nameAndId);
+                Component text = Component.literal(index[0] + ": " + nameAndId.name() + " -> " + deaths);
+                asker.sendSystemMessage(text);
+                index[0]++;
+            });
+            return totalDeaths;
         })));
 
         // public /tellraw command
@@ -116,12 +161,11 @@ public final class PooSMPCommands {
                 // target argument only allows single player names when not op status, so we just won't have it and broadcast to everyone
             .then(Commands.argument("message", ComponentArgument.textComponent(registryAccess))
             .executes(commandContext -> {
-                List<ServerPlayer> players = commandContext.getSource().getServer().getPlayerList().getPlayers();
-
-                for (ServerPlayer serverPlayer : players) {
-                    serverPlayer.sendSystemMessage(ComponentArgument.getResolvedComponent(commandContext, "message", serverPlayer), false);
+                MinecraftServer server = commandContext.getSource().getServer();
+                List<ServerPlayer> players = server.getPlayerList().getPlayers();
+                for (ServerPlayer player : players) {
+                    player.sendSystemMessage(ComponentArgument.getResolvedComponent(commandContext, "message", player));
                 }
-
                 return players.size();
             })
         ));
@@ -132,6 +176,20 @@ public final class PooSMPCommands {
             player.sendSystemMessage(Component.literal("Attempting to KILL YOU!!!!!"));
             player.hurtServer(context.getSource().getLevel(), level.damageSources().source(PooSMPMod.SUICIDE), Float.MAX_VALUE);
             return 1;
+        }));
+
+        dispatcher.register(Commands.literal("randomuuid").executes(context -> {
+            List<Entity> entities = PooUtil.listFromEnumeration(context.getSource().getLevel().getAllEntities().iterator());
+            int index = context.getSource().getLevel().getRandom().nextInt(0, entities.size());
+            try {
+                Entity entity = entities.get(index);
+                context.getSource().getPlayerOrException().sendSystemMessage(Component.literal(entity.toString()));
+                context.getSource().getPlayerOrException().sendSystemMessage(ComponentUtils.copyOnClickText(entity.getStringUUID()));
+                return index;
+            } catch (IndexOutOfBoundsException e) {
+                context.getSource().getPlayerOrException().sendSystemMessage(Component.literal("failed").withStyle(ChatFormatting.RED));
+                return -1;
+            }
         }));
     }
 
@@ -171,12 +229,18 @@ public final class PooSMPCommands {
         } else return -50;
     }
 
-    private static int tellDeathCount(CommandContext<CommandSourceStack> context, ServerPlayer player) {
+    private static int getDeathCount(CommandContext<CommandSourceStack> context, NameAndId player) {
         if (player == null) return 0;
-        int deaths = player.getStats().getValue(Stats.CUSTOM.get(Stats.DEATHS));
-        ServerPlayer asker = context.getSource().getPlayer();
-        if (asker != null)
-            asker.sendSystemMessage(Component.literal(player.getPlainTextName() + " has died " + deaths + " time(s)."));
-        return deaths;
+        PlayerList playerList = context.getSource().getServer().getPlayerList();
+        if (!(playerList instanceof PooPlayerList pooPlayerList)) {
+            context.getSource().sendFailure(Component.literal("Failed to get stats for " + player.name()).withStyle(ChatFormatting.RED));
+            return -10;
+        }
+        boolean isRealPlayer = playerList.getPlayer(player.name()) != null || pooPlayerList.poosmp$getPlayerDataStorage().load(player).isPresent();
+        if (!isRealPlayer)
+            return -1;
+        //PooSMPMod.LOGGER.info("Trying to get stats for player {} ({})", player.name(), player.id());
+        ServerStatsCounter stats = pooPlayerList.poosmp$getPlayerStats(new GameProfile(player.id(), player.name()));
+        return stats.getValue(Stats.CUSTOM.get(Stats.DEATHS));
     }
 }

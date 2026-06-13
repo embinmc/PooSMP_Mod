@@ -46,8 +46,8 @@ public class PooSMPItems {
 
     public static final Item POOP_STICK = register("poop_stick", PoopStickItem::new, new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant().stacksTo(1));
     public static final Item SERVER_SAYS_WHAT_STICK = register("server_says_what_stick", ServerSaysWhatItem::new, new Item.Properties().rarity(Rarity.RARE).stacksTo(1).fireResistant());
-    public static final Item BIOME_STICK = register("biome_stick", BiomeStickItem::new, new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON).component(PooSMPItemComponents.SELECTED_BIOME, "minecraft:plains"));
-    public static final Item BOOM_STICK = register("boom_stick", BoomStickItem::new, new Item.Properties().stacksTo(1).rarity(Rarity.RARE).fireResistant());
+    public static final Item BIOME_STICK = register("biome_stick", BiomeStickItem::new, new Item.Properties().rarity(Rarity.UNCOMMON).component(PooSMPItemComponents.SELECTED_BIOME, "minecraft:plains"));
+    public static final Item BOOM_STICK = register("boom_stick", BoomStickItem::new, new Item.Properties().rarity(Rarity.RARE).fireResistant());
     public static final Item ZOMBIE_STICK = register("zombie_stick", properties -> new MobStickItem(
         properties, EntityType.ZOMBIE,
         MobStickItem.BuiltInNames.ZOMBIE, false
@@ -76,7 +76,7 @@ public class PooSMPItems {
     public static final Item DISC_ENDLESSLY = musicDisc("endlessly", PooSMPJukeboxSongs.ENDLESSLY, "Embin");
     public static final Item DISC_ENDLESSLY_STEREO = musicDisc("endlessly_stereo", PooSMPJukeboxSongs.ENDLESSLY_STEREO, "Embin");
     public static final Item ZAP_STICK = register("lightning_stick", ZapStick::new, new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
-    public static final Item VILLAGER_STICK = register("villager_stick", p -> new MobStickItem(p, EntityType.VILLAGER, MobStickItem.BuiltInNames.VILLAGER), new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
+    public static final Item VILLAGER_STICK = register("villager_stick", p -> new MobStickItem(p, EntityType.VILLAGER, MobStickItem.BuiltInNames.VILLAGER), new Item.Properties().rarity(Rarity.EPIC));
     public static final Item CUBE_POTTERY_SHERD = register("cube_pottery_sherd");
     public static final Item POO_POTTERY_SHERD = register("poo_pottery_sherd");
     public static final Item ONE_DOLLAR_BILL = moneyItem("one_dollar_bill", 1);
@@ -120,6 +120,10 @@ public class PooSMPItems {
     public static final Item JUMPSCARE_STICK = register("jumpscare_stick", new Item.Properties().component(PooSMPItemComponents.JUMPSCARE_STICK, Unit.INSTANCE).useCooldown(1f));
     public static final Item FUN_STICK = register("fun_stick", new Item.Properties().component(PooSMPItemComponents.FUN_STICK, Unit.INSTANCE).useCooldown(1f));
     public static final Item DIMWORLD_STICK = warpStick("dimworld_stick", PooSMPKeys.DIMWORLD);
+    public static final Item FROG_STICK = register("frog_stick", properties -> new MobStickItem(
+            properties, EntityType.FROG,
+            MobStickItem.BuiltInNames.ZOMBIE, true
+    ), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON).fireResistant().component(PooSMPItemComponents.STICK_COOLDOWN_OVERRIDE, 4));
 
     public static ItemStack getBiomeStickStack(String biome) {
         ItemStack stack = new ItemStack(BIOME_STICK);

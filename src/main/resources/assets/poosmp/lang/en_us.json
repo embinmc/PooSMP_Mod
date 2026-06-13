@@ -158,5 +158,13 @@
   "death.attack.poosmp.suicide": "%s killed themselves #LMAO",
   "death.attack.poosmp.suicide.player": "%s killed themselves and changed the trajectory of %s's life forever",
   "upgrade.poosmp.strength_2": "Strength II",
-  "item.poosmp.dimworld_stick": "Gloomy Stick"
+  "item.poosmp.dimworld_stick": "Gloomy Stick",
+  "item.poosmp.frog_stick": "Frog Stick",
+  "dimension.poosmp.hyrule": "Hyrule",
+  "dimension.poosmp.missingno": "missingno",
+  "dimension.poosmp.dimworld": "Dimworld",
+  "biome.poosmp.dimworld_sky": "Dimworld (Sky)",
+  "biome.poosmp.dimworld_surface": "Dimworld (Surface)",
+  "biome.poosmp.dimworld_depths": "Dimworld (Depths)",
+  "biome.poosmp.gloomy_meadows": "Gloomy Meadows"
 }

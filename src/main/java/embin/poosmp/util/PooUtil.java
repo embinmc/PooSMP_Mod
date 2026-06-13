@@ -8,6 +8,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.Util;
 import net.minecraft.world.entity.decoration.painting.PaintingVariant;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.gamerules.GameRule;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Comparator;
+import java.util.*;
 import java.util.function.Consumer;
 
 @SuppressWarnings("NullableProblems")
@@ -57,5 +58,14 @@ public class PooUtil {
         if (level instanceof ServerLevel serverLevel) {
             return serverLevel.getGameRules().get(gameRule);
         } else return gameRule.defaultValue();
+    }
+
+    public static <T> List<T> listFromEnumeration(final Iterator<T> enumeration) {
+        return Util.make(new ArrayList<>(), list -> {
+            while (enumeration.hasNext()) {
+                final T element = enumeration.next();
+                list.add(element);
+            }
+        });
     }
 }

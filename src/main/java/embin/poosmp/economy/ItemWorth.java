@@ -57,10 +57,11 @@ public final class ItemWorth {
         setPrice(c, ShopCategories.NATURE, Items.RED_SAND, 0.2);
         setPrice(c, ShopCategories.MISC, PooSMPBlocks.SUS.asItem(), 1, 0.2);
         setPrice(c, ShopCategories.NATURE, Items.GRAVEL, 0.2);
-        setPrice(c, ShopCategories.NATURE, Items.STICK, 0.02);
-        setPrice(c, ShopCategories.NATURE, Items.STRING, 0.02);
-        setPrice(c, ShopCategories.NATURE, Items.FEATHER, 0.02);
-        setPrice(c, ShopCategories.NATURE, Items.SPIDER_EYE, 0.02);
-        setPrice(c, ShopCategories.NATURE, Items.STICK, 0.02);
+        setPrice(c, ShopCategories.MATERIALS, Items.STICK, 0.02);
+        setPrice(c, ShopCategories.MATERIALS, Items.STRING, 0.02);
+        setPrice(c, ShopCategories.MATERIALS, Items.FEATHER, 0.02);
+        setPrice(c, ShopCategories.MATERIALS, Items.SPIDER_EYE, 0.02);
+        setPrice(c, ShopCategories.MATERIALS, Items.STICK, 0.02);
+        setPrice(c, ShopCategories.MISC, PooSMPBlocks.MISSINGNO_BLOCK.asItem(), 1);
     }
 }

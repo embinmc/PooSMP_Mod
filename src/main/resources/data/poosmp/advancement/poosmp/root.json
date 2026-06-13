@@ -6,7 +6,7 @@
     },
     "title": "PooSMP",
     "description": "Get ready to poo!",
-    "background": "poosmp:textures/gui/advancements/backgrounds/poosmp.png",
+    "background": "poosmp:gui/advancements/backgrounds/poosmp",
     "show_toast": false,
     "announce_to_chat": false
   },

@@ -48,6 +48,10 @@ dependencies {
 	
 }
 
+loom {
+	accessWidenerPath = file("src/main/resources/poosmp.accesswidener")
+}
+
 processResources {
 	inputs.property "version", project.version
 

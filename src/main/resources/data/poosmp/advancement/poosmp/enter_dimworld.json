@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "id": "poosmp:ear_destroyer_9000"
+    },
+    "title": "Unfortunate Circumstances",
+    "description": "Use a Gloom Stick to enter a world that really should've been left forgotten"
+  },
+  "parent": "poosmp:poosmp/root",
+  "criteria": {
+    "entered_dimworld": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "poosmp:dimworld"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "entered_dimworld"
+    ]
+  ],
+  "sends_telemetry_event": false
+}
