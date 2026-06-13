@@ -27,6 +27,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.text.NumberFormat;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -72,7 +73,8 @@ public final class PooSMPCommands {
                 return 0;
             }
             final int[] index = {1};
-            savedData.balance.forEach((uuid, balance) -> {
+            savedData.balance.keySet().stream().sorted(Comparator.comparingDouble(k -> savedData.balance.get(k))).forEach(uuid -> {
+                double balance = savedData.balance.get(uuid);
                 ServerPlayer player = server.getPlayerList().getPlayer(uuid);
                 String formattedBalance = NumberFormat.getCurrencyInstance(Locale.US).format(balance);
 
