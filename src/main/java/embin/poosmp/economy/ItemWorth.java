@@ -24,10 +24,12 @@ public final class ItemWorth {
         setPrice(modifyContext, category, item, price, price / 2D);
     }
 
+    @Deprecated // DOESNT WORK
     public static void setPrice(DefaultItemComponentEvents.ModifyContext modifyContext, ShopCategory category, TagKey<Item> item, double price, double sellPrice) {
         modifyContext.modify(i -> i.getDefaultInstance().is(item), (builder, i) -> builder.set(PooSMPItemComponents.ITEM_VALUE, new ValueComponent(price, sellPrice, category)));
     }
 
+    @Deprecated // DOESNT WORK
     public static void setPrice(DefaultItemComponentEvents.ModifyContext modifyContext, ShopCategory category, TagKey<Item> item, double price) {
         setPrice(modifyContext, category, item, price, price / 2D);
     }
@@ -82,9 +84,12 @@ public final class ItemWorth {
         setPrice(c, ShopCategories.NATURE, Items.COBBLED_DEEPSLATE, 0.5);
         setPrice(c, ShopCategories.NATURE, Items.NETHER_STAR, 200);
 
-        setPrice(c, ShopCategories.NATURE, ItemTags.LOGS, 0.8);
-        setPrice(c, ShopCategories.NATURE, ItemTags.PLANKS, 0.2);
-        setPrice(c, ShopCategories.NATURE, ItemTags.WOODEN_STAIRS, 0.2);
-        setPrice(c, ShopCategories.NATURE, SellableGroups.MOSS, 0.4);
+        //setPrice(c, ShopCategories.NATURE, ItemTags.LOGS, 0.8);
+        //setPrice(c, ShopCategories.NATURE, ItemTags.PLANKS, 0.2);
+        //setPrice(c, ShopCategories.NATURE, ItemTags.WOODEN_STAIRS, 0.2);
+
+        setPrice(c, ShopCategories.NATURE, Items.MOSS_BLOCK, 0.4);
+        setPrice(c, ShopCategories.NATURE, Items.PALE_MOSS_BLOCK, 0.4);
+        setPrice(c, ShopCategories.NATURE, PooSMPBlocks.DIM_MOSS_BLOCK.asItem(), 0.4);
     }
 }
