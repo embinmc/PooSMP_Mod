@@ -1255,7 +1255,9 @@
                   "biome_is": [
                     "poosmp:hyrule",
                     "poosmp:gloomy_ocean",
-                    "poosmp:deep_gloomy_ocean"
+                    "poosmp:deep_gloomy_ocean",
+                    "poosmp:hyrule_ocean",
+                    "poosmp:hyrule_castle"
                   ]
                 },
                 "then_run": {

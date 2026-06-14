@@ -1,8 +1,7 @@
-package embin.poosmp.util;
+package embin.poosmp.villager;
 
 import embin.poosmp.block.PooSMPBlocks;
 import embin.poosmp.items.PooSMPItems;
-import embin.poosmp.villager.PooSMPVillagers;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;

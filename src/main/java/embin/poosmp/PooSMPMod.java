@@ -11,22 +11,19 @@ import embin.poosmp.upgrade.Upgrade;
 import embin.poosmp.util.*;
 import embin.poosmp.villager.PooSMPPoi;
 import embin.poosmp.villager.PooSMPVillagers;
+import embin.poosmp.villager.TradeConstructors;
 import embin.poosmp.world.PooSMPGameRules;
 import embin.poosmp.world.PooSMPRegistries;
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.biome.v1.BiomeModification;
-import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.fabricmc.fabric.impl.biome.modification.BiomeModificationImpl;
 import net.fabricmc.fabric.impl.item.ComponentTooltipAppenderRegistryImpl;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -38,24 +35,12 @@ import net.minecraft.server.players.PlayerList;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.TriState;
-import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntry;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
-import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
-import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
 
 public class PooSMPMod implements ModInitializer {
 	public static final String MOD_ID = "poosmp";

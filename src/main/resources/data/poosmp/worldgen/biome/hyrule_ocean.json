@@ -6,12 +6,28 @@
   "downfall": 0.5,
   "has_precipitation": false,
   "effects": {
-    "water_color": [0.11, 0.36, 0.87],
+    "water_color": [0.18, 0.3, 0.9],
     "grass_color": 2802176,
     "foliage_color": 1355008
   },
   "spawners": {},
   "spawn_costs": {},
   "carvers": [],
-  "features": []
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:warm_ocean_vegetation",
+      "minecraft:seagrass_warm",
+      "minecraft:sea_pickle"
+    ],
+    []
+  ]
 }
