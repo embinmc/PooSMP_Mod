@@ -20,16 +20,16 @@ import net.minecraft.world.item.Items;
 public final class PooSMPItemGroups {
     public static void init() {
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, Id.of("poosmp_items"), POOSMP_ITEMS);
-        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, Id.of("poosmp_biome_sticks"), BIOME_STICKS);
+        //Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, Id.of("poosmp_biome_sticks"), BIOME_STICKS);
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, Id.of("poosmp_music_discs"), MUSIC_DISCS);
-        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, Id.of("poosmp_mob_sticks"), MOB_STICKS);
+        //Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, Id.of("poosmp_mob_sticks"), MOB_STICKS);
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, Id.of("poosmp_money"), MONEY);
     }
 
     public static final CreativeModeTab POOSMP_ITEMS = FabricItemGroup.builder()
             .icon(() -> new ItemStack(PooSMPItems.POOPLET))
             .title(Component.literal("PooSMP"))
-            .displayItems(((displayContext, entries) -> {
+            .displayItems((displayContext, entries) -> {
                 HolderLookup.Provider provider = displayContext.holders();
                 entries.accept(PooSMPBlocks.POOP_BLOCK);
                 entries.accept(PooSMPItems.POOP_STICK);
@@ -105,19 +105,21 @@ public final class PooSMPItemGroups {
                 entries.accept(PooSMPItems.FUN_STICK);
                 entries.accept(PooSMPItems.DIMWORLD_STICK);
                 entries.accept(PooSMPItems.FROG_STICK);
-            })).build();
-
-    public static final CreativeModeTab BIOME_STICKS = FabricItemGroup.builder()
-            .icon(() -> new ItemStack(PooSMPItems.BIOME_STICK))
-            .title(Component.literal("PooSMP: Biome Sticks"))
-            .displayItems((displayContext, entries) -> {
-                HolderLookup.Provider provider = displayContext.holders();
-                PooUtil.forEachEntry(provider, Registries.BIOME, biomeHolder -> {
-                    ItemStack itemStack = new ItemStack(PooSMPItems.BIOME_STICK);
-                    itemStack.set(PooSMPItemComponents.SELECTED_BIOME, biomeHolder.getRegisteredName());
-                    entries.accept(itemStack);
-                });
+                entries.accept(PooSMPBlocks.DIM_MOSS_BLOCK);
+                entries.accept(PooSMPBlocks.DIM_MOSS_CARPET);
             }).build();
+
+    //public static final CreativeModeTab BIOME_STICKS = FabricItemGroup.builder()
+    //        .icon(() -> new ItemStack(PooSMPItems.BIOME_STICK))
+    //        .title(Component.literal("PooSMP: Biome Sticks"))
+    //        .displayItems((displayContext, entries) -> {
+    //            HolderLookup.Provider provider = displayContext.holders();
+    //            PooUtil.forEachEntry(provider, Registries.BIOME, biomeHolder -> {
+    //                ItemStack itemStack = new ItemStack(PooSMPItems.BIOME_STICK);
+    //                itemStack.set(PooSMPItemComponents.SELECTED_BIOME, biomeHolder.getRegisteredName());
+    //                entries.accept(itemStack);
+    //            });
+    //        }).build();
 
     public static final CreativeModeTab MUSIC_DISCS = FabricItemGroup.builder()
             .icon(() -> new ItemStack(PooSMPItems.DISC_TRIFECTA_CAP))
@@ -127,13 +129,13 @@ public final class PooSMPItemGroups {
                 PooUtil.forEachEntryInTag(provider, Registries.ITEM, PooSMPTags.Items.POOSMP_DISCS, ItemStack::new);
             }).build();
 
-    public static final CreativeModeTab MOB_STICKS = FabricItemGroup.builder()
-            .icon(() -> new ItemStack(Items.ZOMBIE_HEAD))
-            .title(Component.literal("PooSMP: Mob Sticks"))
-            .displayItems((displayContext, entries) -> {
-                HolderLookup.Provider provider = displayContext.holders();
-                MobStickItem.Stack.getStacks(provider, entries::accept);
-            }).build();
+    //public static final CreativeModeTab MOB_STICKS = FabricItemGroup.builder()
+    //        .icon(() -> new ItemStack(Items.ZOMBIE_HEAD))
+    //        .title(Component.literal("PooSMP: Mob Sticks"))
+    //        .displayItems((displayContext, entries) -> {
+    //            HolderLookup.Provider provider = displayContext.holders();
+    //            MobStickItem.Stack.getStacks(provider, entries::accept);
+    //        }).build();
 
     public static final CreativeModeTab MONEY = FabricItemGroup.builder()
             .icon(() -> new ItemStack(PooSMPItems.ONE_DOLLAR_BILL))

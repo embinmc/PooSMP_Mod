@@ -508,7 +508,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:pale_moss_block"
+                                    "Name": "poosmp:dim_moss_block"
                                   }
                                 }
                               },
@@ -771,7 +771,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:pale_moss_block"
+                                    "Name": "poosmp:dim_moss_block"
                                   }
                                 }
                               },

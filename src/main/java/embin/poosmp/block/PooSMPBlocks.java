@@ -3,26 +3,22 @@ package embin.poosmp.block;
 import embin.poosmp.PooSMPMod;
 import embin.poosmp.block.annoyance.Annoyances;
 import embin.poosmp.util.Id;
+import embin.poosmp.world.PooFeatures;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FenceBlock;
-import net.minecraft.world.level.block.GrassBlock;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 
 import java.util.function.Function;
 
@@ -46,6 +42,19 @@ public class PooSMPBlocks {
     public static final Block FAKE_GRASS_BLOCK = register("fake_grass_block", fakeBlock(Blocks.GRASS_BLOCK), copyBlock(Blocks.GRASS_BLOCK));
     public static final Block FAKE_STONE = register("fake_stone", fakeBlock(Blocks.STONE), copyBlock(Blocks.STONE));
     public static final Block RIGGED_STONE = register("rigged_stone", riggedBlock(Blocks.STONE), copyBlock(Blocks.STONE));
+    public static final Block DIM_MOSS_BLOCK = register(
+            "dim_moss_block",
+            (properties) -> new BonemealableFeaturePlacerBlock(PooFeatures.DIM_MOSS_PATCH_BONEMEAL, properties),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_GRAY)
+                    .strength(0.1F)
+                    .sound(SoundType.MOSS)
+                    .pushReaction(PushReaction.DESTROY)
+    );
+    public static final Block DIM_MOSS_CARPET = register(
+            "dim_moss_carpet", CarpetBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).strength(0.1F).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY)
+    );
 
 
     public static Block register(Function<BlockBehaviour.Properties, Block> blockFunction, String name, Item.Properties settings, BlockBehaviour.Properties blockProperties, boolean should_register_item) {

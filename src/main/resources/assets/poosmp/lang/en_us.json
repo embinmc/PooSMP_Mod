@@ -162,5 +162,12 @@
   "biome.poosmp.dimworld_sky": "Dimworld (Sky)",
   "biome.poosmp.dimworld_surface": "Dimworld (Surface)",
   "biome.poosmp.dimworld_depths": "Dimworld (Depths)",
-  "biome.poosmp.gloomy_meadows": "Gloomy Meadows"
+  "biome.poosmp.gloomy_meadows": "Gloomy Meadows",
+  "biome.poosmp.dim_barrens": "Dim Barrens",
+  "biome.poosmp.gloomy_ocean": "Gloomy Ocean",
+  "biome.poosmp.deep_gloomy_ocean": "Deep Gloomy Ocean",
+  "biome.poosmp.wet_sky": "Wet Sky",
+  "biome.poosmp.gravely_fields": "Gravely Fields",
+  "block.poosmp.dim_moss_block": "Dim Moss Block",
+  "block.poosmp.dim_moss_carpet": "Dim Moss Carpet"
 }

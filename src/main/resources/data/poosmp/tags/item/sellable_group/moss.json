@@ -1,7 +1,6 @@
 {
   "values": [
-    "minecraft:mud",
-    "poosmp:poop_block",
+    "minecraft:moss_block",
     "minecraft:pale_moss_block",
     "poosmp:dim_moss_block"
   ]
