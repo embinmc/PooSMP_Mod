@@ -1,8 +1,6 @@
 {
   "values": [
-    "poosmp:dimworld_sky",
-    "poosmp:gloomy_meadows",
-    "poosmp:dimworld_surface",
-    "poosmp:dimworld_depths"
+    "#poosmp:is_dimworld_land",
+    "#poosmp:is_dimworld_ocean"
   ]
 }

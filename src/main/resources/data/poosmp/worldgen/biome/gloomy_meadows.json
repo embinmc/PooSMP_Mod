@@ -25,8 +25,7 @@
     "minecraft:visual/sky_color": "#335544",
     "minecraft:visual/fog_color": "#1f1f26",
     "minecraft:visual/fog_start_distance": 8.0,
-    "minecraft:visual/fog_end_distance": 240.0,
-    "minecraft:visual/water_fog_color": "#adadad"
+    "minecraft:visual/water_fog_color": "#8d8dad"
   },
   "spawners": {},
   "spawn_costs": {},
@@ -42,6 +41,7 @@
     [],
     [],
     [
+      "minecraft:ore_coal_upper",
       "minecraft:ore_gold",
       "minecraft:ore_gold_lower",
       "minecraft:ore_redstone",
@@ -65,7 +65,9 @@
       "minecraft:patch_dead_bush_badlands",
       "minecraft:patch_sugar_cane_badlands",
       "minecraft:patch_pumpkin",
-      "minecraft:patch_firefly_bush_near_water"
+      "minecraft:patch_firefly_bush_near_water",
+      "minecraft:flower_meadow",
+      "minecraft:trees_meadow"
     ],
     [
       "minecraft:freeze_top_layer"

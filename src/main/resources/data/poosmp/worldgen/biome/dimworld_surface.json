@@ -13,11 +13,11 @@
         "particle": {
           "type": "minecraft:copper_fire_flame"
         },
-        "probability": 0.0008
+        "probability": 0.0004
       }
     ],
     "minecraft:visual/sky_color": "#444444",
-    "minecraft:visual/water_fog_color": "#adadad"
+    "minecraft:visual/water_fog_color": "#8d8dad"
   },
   "spawners": {},
   "spawn_costs": {},
@@ -33,6 +33,8 @@
     [],
     [],
     [
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_coal_lower",
       "minecraft:ore_gold",
       "minecraft:ore_gold_lower",
       "minecraft:ore_redstone",

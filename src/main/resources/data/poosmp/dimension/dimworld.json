@@ -7,23 +7,11 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "poosmp:dimworld_surface",
-          "parameters": {
-            "temperature": 0,
-            "humidity": 0,
-            "continentalness": 0,
-            "depth": 0,
-            "weirdness": 0,
-            "offset": 0,
-            "erosion": 0
-          }
-        },
-        {
           "biome": "poosmp:dimworld_sky",
           "parameters": {
             "temperature": 0,
             "humidity": 0,
-            "continentalness": 0,
+            "continentalness": [-0.455, 1],
             "depth": 1,
             "weirdness": 0,
             "offset": 0,
@@ -43,15 +31,99 @@
           }
         },
         {
+          "biome": "poosmp:gloomy_ocean",
+          "parameters": {
+            "temperature": [-1, 1],
+            "humidity": [-1, 1],
+            "continentalness": [-0.46, -0.19],
+            "depth": 0,
+            "weirdness": [-1, 1],
+            "offset": 0.0,
+            "erosion": [-1, 1]
+          }
+        },
+        {
+          "biome": "poosmp:deep_gloomy_ocean",
+          "parameters": {
+            "temperature": [-1, 1],
+            "humidity": [-1, 1],
+            "continentalness": [-1.05, -0.46],
+            "depth": 0,
+            "weirdness": [-1, 1],
+            "offset": 0.0,
+            "erosion": [-1, 1]
+          }
+        },
+        {
+          "biome": "poosmp:dimworld_surface",
+          "parameters": {
+            "temperature": [-1, 1],
+            "humidity": [-1, 1],
+            "continentalness": [0, 0.2],
+            "depth": 0,
+            "weirdness": [-1, 1],
+            "offset": 0,
+            "erosion": [-1, 1]
+          }
+        },
+        {
+          "biome": "poosmp:dimworld_surface",
+          "parameters": {
+            "temperature": [-1, 1],
+            "humidity": [-1, 1],
+            "continentalness": [0.7, 1],
+            "depth": 0,
+            "weirdness": [-1, 1],
+            "offset": 0,
+            "erosion": [-1, 1]
+          }
+        },
+        {
           "biome": "poosmp:gloomy_meadows",
+          "parameters": {
+            "temperature": [-1, 1],
+            "humidity": [-1, 1],
+            "continentalness": [-0.19, 0],
+            "depth": 0,
+            "weirdness": [-1, 1],
+            "offset": 0.0,
+            "erosion": [-1, 1]
+          }
+        },
+        {
+          "biome": "poosmp:dim_barrens",
+          "parameters": {
+            "temperature": [-1, 1],
+            "humidity": [-1, 1],
+            "continentalness": [0.2, 0.7],
+            "depth": 0,
+            "weirdness": [-0.5, 1],
+            "offset": 0.0,
+            "erosion": [-1, 1]
+          }
+        },
+        {
+          "biome": "poosmp:gravely_fields",
+          "parameters": {
+            "temperature": [-1, 1],
+            "humidity": [-1, 1],
+            "continentalness": [0.2, 0.7],
+            "depth": 0,
+            "weirdness": [-1, 0.5],
+            "offset": 0.1,
+            "erosion": [-1, 1]
+          }
+        },
+        {
+          "biome": "poosmp:wet_sky",
           "parameters": {
             "temperature": 0,
             "humidity": 0,
-            "continentalness": 0.4,
-            "depth": 0,
+            "continentalness": [-1.05, -0.455],
+            "depth": 1,
             "weirdness": 0,
-            "offset": 0.2,
-            "erosion": 0.4
+            "offset": 0,
+            "erosion": 0
           }
         }
       ]

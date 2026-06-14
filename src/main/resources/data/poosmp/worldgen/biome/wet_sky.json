@@ -1,6 +1,6 @@
 {
-  "temperature": 0.8,
-  "downfall": 0.5,
+  "temperature": 0.7,
+  "downfall": 0.8,
   "has_precipitation": false,
   "effects": {
     "water_color": "#666688",
@@ -24,7 +24,9 @@
     ],
     "minecraft:visual/sky_color": "#555555",
     "minecraft:visual/water_fog_color": "#8d8dad",
-    "minecraft:visual/fog_color": "#222244"
+    "minecraft:visual/fog_color": "#202040",
+    "minecraft:visual/fog_start_distance": 8.0,
+    "minecraft:visual/fog_end_distance": 240.0
   },
   "spawners": {},
   "spawn_costs": {},

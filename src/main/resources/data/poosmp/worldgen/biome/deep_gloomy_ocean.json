@@ -1,11 +1,11 @@
 {
-  "temperature": 0.8,
+  "temperature": 0.6,
   "downfall": 0.5,
   "has_precipitation": false,
   "effects": {
-    "water_color": "#553344",
-    "grass_color": "#553344",
-    "foliage_color": "#553344"
+    "water_color": "#484874",
+    "grass_color": "#486454",
+    "foliage_color": "#48485a"
   },
   "attributes": {
     "minecraft:visual/ambient_particles": [
@@ -13,19 +13,11 @@
         "particle": {
           "type": "minecraft:copper_fire_flame"
         },
-        "probability": 0.0004
-      },
-      {
-        "particle": {
-          "type": "minecraft:firefly"
-        },
-        "probability": 0.006
+        "probability": 0.0006
       }
     ],
-    "minecraft:visual/fog_color": "#2f0f16",
-    "minecraft:visual/fog_start_distance": 8.0,
-    "minecraft:visual/fog_end_distance": 240.0,
-    "minecraft:visual/water_fog_color": "#ad8d9d"
+    "minecraft:visual/sky_color": "#555555",
+    "minecraft:visual/water_fog_color": "#8d8dad"
   },
   "spawners": {},
   "spawn_costs": {},
@@ -35,12 +27,13 @@
     [],
     [],
     [
-      "minecraft:monster_room",
       "minecraft:monster_room_deep"
     ],
     [],
     [],
     [
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_coal_lower",
       "minecraft:ore_gold",
       "minecraft:ore_gold_lower",
       "minecraft:ore_redstone",
@@ -58,7 +51,11 @@
     ],
     [],
     [],
-    [],
-    []
+    [
+      "minecraft:sea_pickle"
+    ],
+    [
+      "minecraft:freeze_top_layer"
+    ]
   ]
 }
