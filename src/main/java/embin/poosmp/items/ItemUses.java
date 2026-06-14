@@ -11,11 +11,15 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.UseCooldown;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public final class ItemUses {
     public static void register() {
@@ -45,7 +49,7 @@ public final class ItemUses {
         ItemStack itemStack = player.getItemInHand(hand);
         if (itemStack.has(PooSMPItemComponents.FUN_STICK)) {
             if (player.getCooldowns().isOnCooldown(itemStack)) return InteractionResult.PASS;
-            final int chosenEvent = player.getRandom().nextIntBetweenInclusive(0, 2);
+            final int chosenEvent = player.getRandom().nextIntBetweenInclusive(0, 4);
             switch (chosenEvent) {
                 case 0 -> { // jumpscare
                     if (player instanceof ServerPlayer serverPlayer) {
@@ -60,6 +64,17 @@ public final class ItemUses {
                 case 2 -> { // screen
                     if (player instanceof ServerPlayer serverPlayer) {
                         serverPlayer.connection.send(new ClientboundOpenScreenPacket(0, MenuType.GENERIC_9x5, Component.literal("gay")));
+                    }
+                }
+                case 3 -> { // up
+                    if (player instanceof ServerPlayer serverPlayer) {
+                        serverPlayer.move(MoverType.PLAYER, new Vec3(0, 4, 0));
+                    }
+                }
+                case 4 -> { // lightning
+                    if (player instanceof ServerPlayer serverPlayer) {
+                        var slevel = serverPlayer.level();
+                        EntityType.LIGHTNING_BOLT.spawn(slevel, serverPlayer.blockPosition(), EntitySpawnReason.SPAWN_ITEM_USE);
                     }
                 }
             }
