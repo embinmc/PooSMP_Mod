@@ -77,8 +77,6 @@ public class PooSMPItems {
     public static final Item DISC_ENDLESSLY_STEREO = musicDisc("endlessly_stereo", PooSMPJukeboxSongs.ENDLESSLY_STEREO, "Embin");
     public static final Item ZAP_STICK = register("lightning_stick", ZapStick::new, new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
     public static final Item VILLAGER_STICK = register("villager_stick", p -> new MobStickItem(p, EntityType.VILLAGER, MobStickItem.BuiltInNames.VILLAGER), new Item.Properties().rarity(Rarity.EPIC));
-    public static final Item CUBE_POTTERY_SHERD = register("cube_pottery_sherd");
-    public static final Item POO_POTTERY_SHERD = register("poo_pottery_sherd");
     public static final Item ONE_DOLLAR_BILL = moneyItem("one_dollar_bill", 1);
     public static final Item BACON_BUCKET = register(
         "bacon_bucket",
@@ -91,11 +89,6 @@ public class PooSMPItems {
     public static final Item TWENTY_FIVE_DOLLAR_BILL = moneyItem("twenty_five_dollar_bill", 25);
     public static final Item FIFTY_DOLLAR_BILL = moneyItem("fifty_dollar_bill", 50);
     public static final Item HUNDRED_DOLLAR_BILL = moneyItem("hundred_dollar_bill", 100);
-    //public static final Item ONE_DOLLAR_COIN = coinItem("one_dollar_coin", 100);
-    //public static final Item ONE_CENT_COIN = coinItem("one_cent_coin", 1);
-    //public static final Item FIVE_CENT_COIN = coinItem("five_cent_coin", 5);
-    //public static final Item TEN_CENT_COIN = coinItem("ten_cent_coin", 10);
-    //public static final Item TWENTY_FIVE_CENT_COIN = coinItem("twenty_five_cent_coin", 25);
     public static final Item COW_STICK = register("cow_stick", properties -> new MobStickItem(properties, EntityType.COW, MobStickItem.BuiltInNames.COW, false));
     public static final Item DISC_STORY_OF_UNDERTALE = musicDisc("story_of_undertale", PooSMPJukeboxSongs.SOU, "Cubey");
     public static final Item RAW_RED_POO = register("raw_red_poo", Rarity.UNCOMMON);
@@ -124,6 +117,7 @@ public class PooSMPItems {
             properties, EntityType.FROG,
             MobStickItem.BuiltInNames.ZOMBIE, true
     ), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON).fireResistant().component(PooSMPItemComponents.STICK_COOLDOWN_OVERRIDE, 4));
+    public static final Item WIND_STICK = register("wind_stick", WindStick::new, new Item.Properties().rarity(Rarity.RARE));
 
     public static ItemStack getBiomeStickStack(String biome) {
         ItemStack stack = new ItemStack(BIOME_STICK);
@@ -172,7 +166,7 @@ public class PooSMPItems {
     }
 
     private static Item warpStick(String name, ResourceKey<Level> targetDimension) {
-        return register(name, WarpStick::new, new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).component(PooSMPItemComponents.WARP_DIMENSION, targetDimension));
+        return register(name, WarpStick::new, new Item.Properties().rarity(Rarity.EPIC).component(PooSMPItemComponents.WARP_DIMENSION, targetDimension));
     }
 
     public static ItemAttributeModifiers healthTotemAttributes(int hp, String id_suffix) {

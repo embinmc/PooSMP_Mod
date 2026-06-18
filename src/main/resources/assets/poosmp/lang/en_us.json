@@ -169,5 +169,6 @@
   "biome.poosmp.wet_sky": "Wet Sky",
   "biome.poosmp.gravely_fields": "Gravely Fields",
   "block.poosmp.dim_moss_block": "Dim Moss Block",
-  "block.poosmp.dim_moss_carpet": "Dim Moss Carpet"
+  "block.poosmp.dim_moss_carpet": "Dim Moss Carpet",
+  "item.poosmp.wind_stick": "Wind Stick"
 }

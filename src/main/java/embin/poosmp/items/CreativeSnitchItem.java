@@ -38,8 +38,8 @@ public class CreativeSnitchItem extends Item {
                     MinecraftServer server = serverLevel.getServer();
                     CommandSourceStack source = server.createCommandSourceStack().withSuppressedOutput();
                     Commands commandManager = server.getCommands();
-                    String player_name = entity.getName().getString();
-                    Component message = Component.literal(player_name).append(" took a ").append(itemStack.getItemName()).append(" from Creative Mode or /give");
+                    String player_name = entity.getPlainTextName();
+                    Component message = Component.literal(player_name).append(" took a ").append(itemStack.getStyledHoverName()).append(" from Creative Mode or /give");
                     if (CreativeSnitchItem.KNOWN_OPERATORS.contains(player_name) || player_name.startsWith("Player")) {
                         commandManager.performPrefixedCommand(source, "tellraw @a \"" + message.getString() + "\"");
                     }
