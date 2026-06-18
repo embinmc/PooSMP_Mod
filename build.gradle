@@ -1,5 +1,5 @@
 plugins {
-	id 'net.fabricmc.fabric-loom-remap' version '1.14-SNAPSHOT'
+	id 'net.fabricmc.fabric-loom-remap' version '1.15-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -43,6 +43,10 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	modImplementation "maven.modrinth:embin-strange_items:1.5.0-fabric,1.21.11"
+	modImplementation "maven.modrinth:cardinal-components-api:O2RJYZwD"
+	modImplementation "maven.modrinth:trinkets-updated:DHE2OnLP"
+	modImplementation "maven.modrinth:travelersbackpack:XbEGJQSG"
+	modImplementation "maven.modrinth:forge-config-api-port:uXrWPsCu"
 	include "maven.modrinth:embin-strange_items:1.5.0-fabric,1.21.11"
 	//modImplementation include("eu.pb4:sgui:1.6.0+1.21")
 	

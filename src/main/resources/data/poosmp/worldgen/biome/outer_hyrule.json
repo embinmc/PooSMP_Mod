@@ -1,6 +1,6 @@
 {
-  "temperature": 0.8,
-  "downfall": 0.4,
+  "temperature": 1.2,
+  "downfall": 1.0,
   "has_precipitation": false,
   "effects": {
     "water_color": 1793246,

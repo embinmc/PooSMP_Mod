@@ -1,0 +1,10 @@
+{
+  "targets": ["poosmp:wedding_ring"],
+  "render": [
+    {
+      "type": "item",
+      "model_part": ":offhand",
+      "display_context": "thirdperson_lefthand"
+    }
+  ]
+}

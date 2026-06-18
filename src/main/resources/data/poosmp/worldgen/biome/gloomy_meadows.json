@@ -22,10 +22,9 @@
         "probability": 0.001
       }
     ],
-    "minecraft:visual/sky_color": "#335544",
+    "minecraft:visual/sky_color": "#153826",
     "minecraft:visual/fog_color": "#1f1f26",
-    "minecraft:visual/fog_start_distance": 8.0,
-    "minecraft:visual/water_fog_color": "#8d8dad"
+    "minecraft:visual/fog_start_distance": 8.0
   },
   "spawners": {},
   "spawn_costs": {},

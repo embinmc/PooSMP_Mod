@@ -3,6 +3,7 @@
   "package": "embin.poosmp.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "BackpackMixin",
     "BlockItemMixin",
     "CachedUserNameResolverMixin",
     "ItemEntityMixin",
@@ -12,5 +13,8 @@
   ],
   "injectors": {
     "defaultRequire": 1
-	}
+  },
+  "client": [
+    "client.BackpackHudMixin"
+  ]
 }

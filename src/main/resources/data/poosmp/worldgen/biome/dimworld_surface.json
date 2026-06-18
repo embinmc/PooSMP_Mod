@@ -16,8 +16,7 @@
         "probability": 0.0004
       }
     ],
-    "minecraft:visual/sky_color": "#444444",
-    "minecraft:visual/water_fog_color": "#8d8dad"
+    "minecraft:visual/sky_color": "#444444"
   },
   "spawners": {},
   "spawn_costs": {},

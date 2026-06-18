@@ -107,6 +107,7 @@ public final class PooSMPItemGroups {
                 entries.accept(PooSMPItems.FROG_STICK);
                 entries.accept(PooSMPBlocks.DIM_MOSS_BLOCK);
                 entries.accept(PooSMPBlocks.DIM_MOSS_CARPET);
+                entries.accept(PooSMPItems.WIND_STICK);
             }).build();
 
     //public static final CreativeModeTab BIOME_STICKS = FabricItemGroup.builder()
