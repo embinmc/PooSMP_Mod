@@ -1,5 +1,8 @@
 package embin.poosmp.items;
 
+import embin.poosmp.util.PooUtil;
+import embin.poosmp.world.PooSMPGameRules;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -21,7 +24,13 @@ public class PoopStickItem extends Item {
         double player_z = user.getZ();
         if (Math.random() > 0.5) {
             world.playSound(null, player_x, player_y + 5, player_z, SoundEvents.HORSE_DEATH, SoundSource.PLAYERS);
-            world.explode(null, player_x, player_y, player_z, 5.0F, Level.ExplosionInteraction.NONE);
+            if (world instanceof ServerLevel serverLevel) {
+                if (serverLevel.getGameRules().get(PooSMPGameRules.OUTLAW_EXPLOSIVE_GADGETS)) {
+                    user.displayClientMessage(PooUtil.OUTLAWED_EXPLOSIVE_TEXT, true);
+                } else {
+                    serverLevel.explode(null, player_x, player_y, player_z, 5.0F, Level.ExplosionInteraction.NONE);
+                }
+            }
         } else {
             world.playSound(null, player_x, player_y, player_z, SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(3).value(), SoundSource.PLAYERS);
         }

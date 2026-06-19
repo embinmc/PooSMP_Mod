@@ -1,9 +1,12 @@
 package embin.poosmp.items;
 
+import embin.poosmp.util.PooUtil;
+import embin.poosmp.world.PooSMPGameRules;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -33,7 +36,12 @@ public class MagicDeviceItem extends Item {
     @Override
     public InteractionResult use(Level world, Player user, InteractionHand hand) {
         ItemStack itemStack = user.getItemInHand(hand);
-        if (!world.isClientSide()) {
+        user.awardStat(Stats.ITEM_USED.get(this));
+        if (world instanceof ServerLevel serverLevel) {
+            if (serverLevel.getGameRules().get(PooSMPGameRules.OUTLAW_EXPLOSIVE_GADGETS)) {
+                user.displayClientMessage(PooUtil.OUTLAWED_EXPLOSIVE_TEXT, true);
+                return InteractionResult.FAIL;
+            }
             HitResult hitResult = user.pick(20.0D, 0.0F, false);
             DamageSources damageSources = new DamageSources(world.registryAccess());
             ExplosionDamageCalculator eb = new ExplosionDamageCalculator();
@@ -59,7 +67,6 @@ public class MagicDeviceItem extends Item {
             }
             itemStack.hurtAndBreak(1, user, hand);
         }
-        user.awardStat(Stats.ITEM_USED.get(this));
         return InteractionResult.SUCCESS;
     }
 

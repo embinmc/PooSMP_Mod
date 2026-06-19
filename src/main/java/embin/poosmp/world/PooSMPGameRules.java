@@ -11,6 +11,7 @@ public final class PooSMPGameRules {
 
     public static final GameRule<Double> STARTING_BALANCE = ofDouble("starting_balance", 0D);
     public static final GameRule<Boolean> ANNOYANCES_MAKE_SOUND = ofBool("annoyances_make_sound", true);
+    public static final GameRule<Boolean> OUTLAW_EXPLOSIVE_GADGETS = ofBool("outlaw_explosive_gadgets", false);
 
     private static GameRule<Boolean> ofBool(String id, boolean defaultValue) {
         return GameRuleBuilder.forBoolean(defaultValue).buildAndRegister(Id.of(id));

@@ -82,7 +82,7 @@ public final class ItemWorth {
         setPrice(c, ShopCategories.NATURE, Items.DIORITE, 0.1);
         setPrice(c, ShopCategories.NATURE, Items.DEEPSLATE, 0.4);
         setPrice(c, ShopCategories.NATURE, Items.COBBLED_DEEPSLATE, 0.5);
-        setPrice(c, ShopCategories.NATURE, Items.NETHER_STAR, 200);
+        setPrice(c, ShopCategories.NATURE, Items.NETHER_STAR, 500);
 
         //setPrice(c, ShopCategories.NATURE, ItemTags.LOGS, 0.8);
         //setPrice(c, ShopCategories.NATURE, ItemTags.PLANKS, 0.2);

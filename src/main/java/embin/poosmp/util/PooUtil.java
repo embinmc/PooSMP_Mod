@@ -1,10 +1,12 @@
 package embin.poosmp.util;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
@@ -25,6 +27,8 @@ public class PooUtil {
     public static final Comparator<Holder<PaintingVariant>> PAINTING_COMPARATOR = Comparator.comparing(
             Holder::value, Comparator.comparingInt(PaintingVariant::area).thenComparing(PaintingVariant::width)
     );
+    public static final Component OUTLAWED_EXPLOSIVE_TEXT = Component.literal("Explosive gadgets are currently outlawed").withStyle(ChatFormatting.RED);
+    public static final Component SUPPRESSED_EXPLOSIVE = Component.literal("Explosion suppressed due to explosive gadgets currently being outlawed").withStyle(ChatFormatting.RED);
 
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException("PooSMP: Cannot round to less than 0 places");

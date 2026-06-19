@@ -38,13 +38,15 @@ dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings loom.officialMojangMappings()
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	api 'com.electronwill.night-config:core:3.8.1'
+	api 'com.electronwill.night-config:toml:3.8.1'
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	modImplementation "maven.modrinth:embin-strange_items:1.5.0-fabric,1.21.11"
-	modImplementation "maven.modrinth:cardinal-components-api:O2RJYZwD"
-	modImplementation "maven.modrinth:trinkets-updated:DHE2OnLP"
+	//modImplementation "maven.modrinth:cardinal-components-api:O2RJYZwD"
+	//modImplementation "maven.modrinth:trinkets-updated:DHE2OnLP"
 	modImplementation "maven.modrinth:travelersbackpack:XbEGJQSG"
 	modImplementation "maven.modrinth:forge-config-api-port:uXrWPsCu"
 	include "maven.modrinth:embin-strange_items:1.5.0-fabric,1.21.11"
