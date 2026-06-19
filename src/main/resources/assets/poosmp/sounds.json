@@ -112,5 +112,14 @@
 				"stream":true
 			}
 		]
+	},
+	"annoyance.ooblep":{
+		"subtitle":"subtitles.poosmp.annoyance.ooblep",
+		"sounds":[
+			{
+				"name":"poosmp:tf2_kill",
+				"volume":1.0
+			}
+		]
 	}
 }

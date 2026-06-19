@@ -118,6 +118,7 @@ public class PooSMPItems {
             MobStickItem.BuiltInNames.ZOMBIE, true
     ), new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON).fireResistant().component(PooSMPItemComponents.STICK_COOLDOWN_OVERRIDE, 4));
     public static final Item WIND_STICK = register("wind_stick", WindStick::new, new Item.Properties().rarity(Rarity.RARE));
+    public static final Item ITEM_FORCING_UPGRADE = register("item_forcing_upgrade", Rarity.EPIC);
 
     public static ItemStack getBiomeStickStack(String biome) {
         ItemStack stack = new ItemStack(BIOME_STICK);

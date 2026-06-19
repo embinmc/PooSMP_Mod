@@ -21,6 +21,7 @@ public class PooSMPSoundEvents {
     public static final SoundEvent MUSIC_DISC_ENDLESSLY_STEREO = registerSound("music_disc.endlessly.stereo");
     public static final SoundEvent SUS = registerSound("sus");
     public static final SoundEvent MUSIC_DISC_SOU = registerSound("music_disc.story_of_undertale");
+    public static final SoundEvent OOBLEP = registerSound("annoyance.ooblep");
 
     private static SoundEvent registerSound(String namespace) {
         Identifier id = Id.of(namespace);

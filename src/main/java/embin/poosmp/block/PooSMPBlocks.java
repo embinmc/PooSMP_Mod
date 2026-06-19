@@ -1,6 +1,7 @@
 package embin.poosmp.block;
 
 import embin.poosmp.PooSMPMod;
+import embin.poosmp.block.annoyance.Annoyance;
 import embin.poosmp.block.annoyance.Annoyances;
 import embin.poosmp.util.Id;
 import embin.poosmp.world.PooFeatures;
@@ -30,14 +31,14 @@ public class PooSMPBlocks {
     public static final Block POOP_BRICK_SLAB = register("poop_brick_slab", SlabBlock::new, copyBlock(POOP_BRICKS));
     public static final Block POOP_BRICK_WALL = register("poop_brick_wall", wallBlock(), copyBlock(POOP_BRICKS));
     public static final Block RED_NETHER_BRICK_FENCE = register("red_nether_brick_fence", FenceBlock::new, BlockBehaviour.Properties.of().mapColor(MapColor.NETHER).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F).sound(SoundType.NETHER_BRICKS));
-    public static final Block SUS = register("im_gonna_kill_myself", properties -> new AnnoyanceBlock(Annoyances.SUS, properties), BlockBehaviour.Properties.of().mapColor(DyeColor.RED).strength(1.0F));
+    public static final Block SUS = registerAnnoyance("im_gonna_kill_myself", Annoyances.SUS, MapColor.COLOR_RED);
     public static final Block DDEDEDODEDIAMANTE_BLOCK = register("ddededodediamante_block", ddededodediamanteBlock::new, BlockBehaviour.Properties.of().mapColor(DyeColor.MAGENTA).strength(1.0F));
     public static final Block PENIS_BLOCK = register("minecraft:penis", GrassBlock::new, copyBlock(Blocks.GRASS_BLOCK));
     public static final Block BANKERS_TABLE = register("bankers_table", copyBlock(Blocks.FLETCHING_TABLE).mapColor(DyeColor.BROWN));
     // i can't bother with this right now
     // public static final Block ITEM_SHOP = register("item_shop", new ItemShopBlock(copyBlock(Blocks.IRON_BLOCK)));
     public static final Block RED_POO_BLOCK = register("red_poo_block", BlockBehaviour.Properties.of().requiresCorrectToolForDrops().mapColor(DyeColor.RED).strength(2.5F).sound(SoundType.BONE_BLOCK), new Item.Properties().rarity(Rarity.UNCOMMON));
-    public static final Block DRAGON_ANNOYANCE = register("ear_destroyer_9000", properties -> new AnnoyanceBlock(Annoyances.DRAGON, properties), BlockBehaviour.Properties.of().mapColor(DyeColor.WHITE).strength(1.0F));
+    public static final Block DRAGON_ANNOYANCE = registerAnnoyance("ear_destroyer_9000", Annoyances.DRAGON, MapColor.TERRACOTTA_WHITE);
     public static final Block FAKE_DIRT = register("fake_dirt", fakeBlock(Blocks.DIRT), copyBlock(Blocks.DIRT));
     public static final Block FAKE_GRASS_BLOCK = register("fake_grass_block", fakeBlock(Blocks.GRASS_BLOCK), copyBlock(Blocks.GRASS_BLOCK));
     public static final Block FAKE_STONE = register("fake_stone", fakeBlock(Blocks.STONE), copyBlock(Blocks.STONE));
@@ -55,6 +56,7 @@ public class PooSMPBlocks {
             "dim_moss_carpet", CarpetBlock::new,
             BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).strength(0.1F).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY)
     );
+    public static final Block DEHEED_ANNOYANCE = registerAnnoyance("glue_factory", Annoyances.DEHEED, MapColor.TERRACOTTA_WHITE, Annoyances::onSoundDeheed);
 
 
     public static Block register(Function<BlockBehaviour.Properties, Block> blockFunction, String name, Item.Properties settings, BlockBehaviour.Properties blockProperties, boolean should_register_item) {
@@ -114,6 +116,14 @@ public class PooSMPBlocks {
 
     public static Function<BlockBehaviour.Properties, Block> riggedBlock(Block block) {
         return settings -> new RiggedBlock(block, settings.instabreak());
+    }
+
+    public static Block registerAnnoyance(String id, Annoyance annoyance, MapColor mapColor) {
+        return register(id, properties -> new AnnoyanceBlock(annoyance, properties), BlockBehaviour.Properties.of().mapColor(mapColor).strength(1.0F));
+    }
+
+    public static Block registerAnnoyance(String id, Annoyance annoyance, MapColor mapColor, AnnoyanceBlock.OnSound onSound) {
+        return register(id, properties -> new AnnoyanceBlock(annoyance, properties, onSound), BlockBehaviour.Properties.of().mapColor(mapColor).strength(1.0F));
     }
 
     public static void init() {

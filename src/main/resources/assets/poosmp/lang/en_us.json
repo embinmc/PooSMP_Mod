@@ -165,5 +165,6 @@
   "biome.poosmp.gravely_fields": "Gravely Fields",
   "block.poosmp.dim_moss_block": "Dim Moss Block",
   "block.poosmp.dim_moss_carpet": "Dim Moss Carpet",
-  "item.poosmp.wind_stick": "Wind Stick"
+  "item.poosmp.wind_stick": "Wind Stick",
+  "item.poosmp.item_forcing_upgrade": "Backpack Item Forcing Upgrade"
 }

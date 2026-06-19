@@ -16,7 +16,6 @@ import embin.poosmp.world.PooSMPGameRules;
 import embin.poosmp.world.PooSMPRegistries;
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.biome.v1.BiomeModificationContext;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
@@ -25,6 +24,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.impl.item.ComponentTooltipAppenderRegistryImpl;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -39,6 +39,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,12 +86,18 @@ public class PooSMPMod implements ModInitializer {
 			modifyContext.modify(item -> true, (builder, item) -> {
 				Identifier itemId = BuiltInRegistries.ITEM.getKey(item);
 				builder.set(PooSMPItemComponents.DISPLAYED_ID, itemId);
+				if (item == PooSMPItems.ITEM_FORCING_UPGRADE)
+					builder.set(DataComponents.LORE, ItemLore.EMPTY.withLineAdded(Component.literal("Apply to a backpack with a smithing table").withStyle(ChatFormatting.AQUA)));
 				//if (itemId.getNamespace().equals(Identifier.DEFAULT_NAMESPACE)) {
 				//	builder.add(PooSMPItemComponents.DISPLAYED_ID, Identifier.of("mojang", itemId.getPath()));
 				//} else {
 				//	builder.add(PooSMPItemComponents.DISPLAYED_ID, itemId);
 				//}
 			});
+			//modifyContext.modify(item -> {
+			//	// only shulker boxes
+			//	return item instanceof BlockItem blockItem && blockItem.getBlock() instanceof ShulkerBoxBlock;
+			//}, (builder, item) -> builder.set(PooSMPItemComponents.FORCE_ALLOW_IN_BACKPACK, Unit.INSTANCE));
 		});
 
         ServerTickEvents.START_WORLD_TICK.register(Id.of("on_tick"), level -> {

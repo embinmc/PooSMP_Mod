@@ -25,11 +25,17 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class AnnoyanceBlock extends Block implements BlockWithTooltip {
-    private final Annoyance annoyance;
+    protected final Annoyance annoyance;
+    protected final OnSound onSound;
 
-    public AnnoyanceBlock(Annoyance annoyance, BlockBehaviour.Properties settings) {
+    public AnnoyanceBlock(Annoyance annoyance, BlockBehaviour.Properties settings, OnSound onSound) {
         super(settings);
         this.annoyance = annoyance;
+        this.onSound = onSound;
+    }
+
+    public AnnoyanceBlock(Annoyance annoyance, BlockBehaviour.Properties settings) {
+        this(annoyance, settings, OnSound.DO_NOTHING);
     }
 
     @Override
@@ -46,17 +52,17 @@ public class AnnoyanceBlock extends Block implements BlockWithTooltip {
                 float v = this.annoyance.getVolume() * 1.5F;
                 float p = this.annoyance.getPitch() * 1.5F;
                 world.playSound(null, blockPos, this.annoyance.getSound(), SoundSource.BLOCKS, v, p);
+                this.onSound.onSound(serverLevel, state, blockPos);
             }
         }
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        if (world instanceof ServerLevel serverLevel) {
-            if (serverLevel.getGameRules().get(PooSMPGameRules.ANNOYANCES_MAKE_SOUND)) {
-                if (random.nextIntBetweenInclusive(1, 100) <= this.annoyance.getChance()) {
-                    world.playSound(null, pos, this.annoyance.getSound(), SoundSource.BLOCKS, this.annoyance.getVolume(), this.annoyance.getPitch());
-                }
+    protected void randomTick(BlockState state, ServerLevel serverLevel, BlockPos pos, RandomSource random) {
+        if (serverLevel.getGameRules().get(PooSMPGameRules.ANNOYANCES_MAKE_SOUND)) {
+            if (random.nextIntBetweenInclusive(1, 100) <= this.annoyance.getChance()) {
+                serverLevel.playSound(null, pos, this.annoyance.getSound(), SoundSource.BLOCKS, this.annoyance.getVolume(), this.annoyance.getPitch());
+                this.onSound.onSound(serverLevel, state, pos);
             }
         }
     }
@@ -67,5 +73,12 @@ public class AnnoyanceBlock extends Block implements BlockWithTooltip {
             Identifier annoyanceId = Objects.requireNonNull(PooSMPRegistries.ANNOYANCE.getKey(this.annoyance));
             consumer.accept(Component.literal("Annoyance: " + annoyanceId).withStyle(ChatFormatting.DARK_GRAY));
         }
+    }
+
+    @FunctionalInterface
+    public interface OnSound {
+        void onSound(final ServerLevel level, BlockState state, BlockPos pos);
+
+        OnSound DO_NOTHING = (level, state, pos) -> {};
     }
 }

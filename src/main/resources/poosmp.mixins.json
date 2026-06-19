@@ -4,6 +4,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "BackpackMixin",
+    "BackpackSlotMixin",
+    "BackpackWrapperMixin",
     "BlockItemMixin",
     "CachedUserNameResolverMixin",
     "ItemEntityMixin",

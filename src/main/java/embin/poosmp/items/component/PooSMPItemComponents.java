@@ -6,6 +6,7 @@ import embin.poosmp.util.Id;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Unit;
@@ -65,7 +66,7 @@ public class PooSMPItemComponents {
     public static final DataComponentType<Double> MONEY = Registry.register(
         BuiltInRegistries.DATA_COMPONENT_TYPE,
         Id.of("money"),
-        DataComponentType.<Double>builder().persistent(Codec.DOUBLE).build()
+        DataComponentType.<Double>builder().persistent(Codec.DOUBLE).networkSynchronized(ByteBufCodecs.DOUBLE).build()
     );
 
     public static final DataComponentType<Integer> STICK_COOLDOWN_OVERRIDE = Registry.register(
@@ -78,12 +79,6 @@ public class PooSMPItemComponents {
         BuiltInRegistries.DATA_COMPONENT_TYPE,
         Id.of("biome_stick_radius_override"),
         DataComponentType.<Integer>builder().persistent(Codec.INT).build()
-    );
-
-    public static final DataComponentType<Integer> BLOCKS_MINED = Registry.register(
-            BuiltInRegistries.DATA_COMPONENT_TYPE,
-            Id.of("strange/blocks_mined"),
-            DataComponentType.<Integer>builder().persistent(Codec.INT).build()
     );
 
     public static final DataComponentType<Identifier> DISPLAYED_ID = Registry.register(
@@ -113,6 +108,12 @@ public class PooSMPItemComponents {
     public static final DataComponentType<Unit> FUN_STICK = Registry.register(
             BuiltInRegistries.DATA_COMPONENT_TYPE,
             Id.of("fun_stick"),
+            DataComponentType.<Unit>builder().persistent(Unit.CODEC).build()
+    );
+
+    public static final DataComponentType<Unit> FORCE_ALLOW_IN_BACKPACK = Registry.register(
+            BuiltInRegistries.DATA_COMPONENT_TYPE,
+            Id.of("force_allow_in_backpack"),
             DataComponentType.<Unit>builder().persistent(Unit.CODEC).build()
     );
 }
