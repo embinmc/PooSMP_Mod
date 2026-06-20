@@ -42,10 +42,9 @@ public class TradeConstructors {
             factories.add(trade(Items.RED_SAND, 4, PooSMPItems.ONE_DOLLAR_BILL));
             factories.add(trade(Items.IRON_INGOT, 2, PooSMPItems.ONE_DOLLAR_BILL, 9));
             factories.add(trade(Items.EMERALD, 1, PooSMPItems.ONE_DOLLAR_BILL, 8));
-            factories.add(trade(Items.APPLE, 1, PooSMPItems.ONE_DOLLAR_BILL));
+            factories.add(trade(Items.GOLD_INGOT, 2, PooSMPItems.ONE_DOLLAR_BILL, 17));
         });
         TradeOfferHelper.registerVillagerOffers(PooSMPVillagers.BANKER_KEY, 3, factories -> {
-            factories.add(trade(Items.GOLD_INGOT, 2, PooSMPItems.ONE_DOLLAR_BILL, 17));
             factories.add(trade(Items.DIAMOND, 1, PooSMPItems.ONE_DOLLAR_BILL, 18));
             factories.add(trade(Items.ECHO_SHARD, 1, PooSMPItems.ONE_DOLLAR_BILL, 64));
             factories.add(enchantedBook(BANKER_TRADEABLE_LOW, PooSMPItems.TWENTY_FIVE_DOLLAR_BILL, 2));
@@ -59,7 +58,6 @@ public class TradeConstructors {
             factories.add(trade(Items.ELYTRA, 1, PooSMPItems.HUNDRED_DOLLAR_BILL, 40));
             factories.add(trade(PooSMPItems.RAW_RED_POO, 1, PooSMPItems.HUNDRED_DOLLAR_BILL, 64));
             factories.add(trade(PooSMPItems.RED_POO_UPGRADE_SMITHING_TEMPLATE, 1, PooSMPItems.HUNDRED_DOLLAR_BILL, 10));
-            factories.add(trade(PooSMPBlocks.DDEDEDODEDIAMANTE_BLOCK, 16, PooSMPItems.TEN_DOLLAR_BILL, 2));
             factories.add(enchantedBook(BANKER_TRADEABLE_HIGH, PooSMPItems.HUNDRED_DOLLAR_BILL, 4));
         });
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 5, factories -> {

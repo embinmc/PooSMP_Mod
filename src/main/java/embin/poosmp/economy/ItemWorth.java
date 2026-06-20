@@ -91,5 +91,6 @@ public final class ItemWorth {
         setPrice(c, ShopCategories.NATURE, Items.MOSS_BLOCK, 0.4);
         setPrice(c, ShopCategories.NATURE, Items.PALE_MOSS_BLOCK, 0.4);
         setPrice(c, ShopCategories.NATURE, PooSMPBlocks.DIM_MOSS_BLOCK.asItem(), 0.4);
+        setPrice(c, ShopCategories.NATURE, Items.SUGAR_CANE, 0.1);
     }
 }
