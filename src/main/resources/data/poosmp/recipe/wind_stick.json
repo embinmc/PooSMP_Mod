@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "4#4",
+    "#3#",
+    "4#4"
+  ],
+  "key": {
+    "3": "#c:rods/wooden",
+    "#": "minecraft:breeze_rod",
+    "4": "poosmp:diamond_shard"
+  },
+  "result": {
+    "id": "poosmp:wind_stick",
+    "count": 1,
+    "components": {
+      "!poosmp:from_creative": {}
+    }
+  },
+  "show_notification": true
+}
