@@ -66,7 +66,7 @@ public class PooSMPItemComponents {
     public static final DataComponentType<Double> MONEY = Registry.register(
         BuiltInRegistries.DATA_COMPONENT_TYPE,
         Id.of("money"),
-        DataComponentType.<Double>builder().persistent(Codec.DOUBLE).networkSynchronized(ByteBufCodecs.DOUBLE).build()
+        DataComponentType.<Double>builder().persistent(Codec.DOUBLE).build()
     );
 
     public static final DataComponentType<Integer> STICK_COOLDOWN_OVERRIDE = Registry.register(

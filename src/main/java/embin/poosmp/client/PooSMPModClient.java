@@ -1,16 +1,12 @@
 package embin.poosmp.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import com.tiviacz.travelersbackpack.handlers.KeybindHandler;
-import com.tiviacz.travelersbackpack.inventory.BackpackContainer;
-import com.tiviacz.travelersbackpack.item.TravelersBackpackItem;
 import embin.poosmp.block.PooSMPBlocks;
 import embin.poosmp.client.screen.upgrade.UpgradesScreen;
 import embin.poosmp.networking.PooSMPMessages;
 import embin.poosmp.util.Id;
 import embin.poosmp.world.PooSMPSavedData;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
