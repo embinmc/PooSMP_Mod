@@ -8,11 +8,11 @@
         "probability": 0.01
       }
     ],
-    "minecraft:visual/sky_color": "#444444",
-    "minecraft:visual/fog_color": "#666666",
-    "minecraft:visual/water_fog_color": "#555555"
+    "minecraft:visual/sky_color": "#333333",
+    "minecraft:visual/fog_color": "#555555",
+    "minecraft:visual/water_fog_color": "#444444"
   },
-  "temperature": 0.85,
+  "temperature": 1.0,
   "downfall": 0.8,
   "has_precipitation": false,
   "creature_spawn_probability": 0.2,
