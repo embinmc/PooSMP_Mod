@@ -1,0 +1,21 @@
+{
+  "type": "poosmp:component_application",
+  "target_item": "#travelersbackpack:custom_travelers_backpack",
+  "transformer": "poosmp:item_forcing_upgrade",
+  "ingredient": "#c:leathers",
+  "component_patch": {
+    "poosmp:force_allow_in_backpack": {},
+    "minecraft:lore": [
+      {
+        "text": "Upgraded with: ",
+        "color": "gray",
+        "extra": [
+          {
+            "text": "Item Forcing Upgrade",
+            "color": "yellow"
+          }
+        ]
+      }
+    ]
+  }
+}

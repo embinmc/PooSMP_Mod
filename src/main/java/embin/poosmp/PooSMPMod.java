@@ -5,6 +5,7 @@ import embin.poosmp.economy.ItemWorth;
 import embin.poosmp.economy.shop.ShopCategories;
 import embin.poosmp.items.ItemUses;
 import embin.poosmp.items.PooSMPItems;
+import embin.poosmp.items.component.ComponentApplicationRecipe;
 import embin.poosmp.items.component.PooSMPItemComponents;
 import embin.poosmp.networking.PooSMPMessages;
 import embin.poosmp.upgrade.Upgrade;
@@ -22,9 +23,11 @@ import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.fabricmc.fabric.api.recipe.v1.sync.RecipeSynchronization;
 import net.fabricmc.fabric.impl.item.ComponentTooltipAppenderRegistryImpl;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -78,6 +81,9 @@ public class PooSMPMod implements ModInitializer {
 
 		DynamicRegistries.registerSynced(PooSMPRegistries.Keys.UPGRADE, Upgrade.CODEC);
 
+		Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, Id.of("component_application"), ComponentApplicationRecipe.SERIALIZER);
+		RecipeSynchronization.synchronizeRecipeSerializer(ComponentApplicationRecipe.SERIALIZER);
+
         ComponentTooltipAppenderRegistryImpl.addBefore(DataComponents.ENCHANTMENTS, PooSMPItemComponents.ITEM_VALUE);
 
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> PooSMPCommands.register(dispatcher, registryAccess));
@@ -87,7 +93,7 @@ public class PooSMPMod implements ModInitializer {
 				Identifier itemId = BuiltInRegistries.ITEM.getKey(item);
 				builder.set(PooSMPItemComponents.DISPLAYED_ID, itemId);
 				if (item == PooSMPItems.ITEM_FORCING_UPGRADE)
-					builder.set(DataComponents.LORE, ItemLore.EMPTY.withLineAdded(Component.literal("Apply to a backpack with a smithing table").withStyle(ChatFormatting.AQUA)));
+					builder.set(DataComponents.LORE, ItemLore.EMPTY.withLineAdded(Component.literal("Apply to a backpack with a smithing table").withStyle(ChatFormatting.BLUE)));
 				//if (itemId.getNamespace().equals(Identifier.DEFAULT_NAMESPACE)) {
 				//	builder.add(PooSMPItemComponents.DISPLAYED_ID, Identifier.of("mojang", itemId.getPath()));
 				//} else {
