@@ -1,0 +1,13 @@
+{
+  "asset_id": "poosmp:the_glue_factory",
+  "width": 3,
+  "height": 3,
+  "title": {
+    "color": "yellow",
+    "translate": "painting.poosmp.the_glue_factory.title"
+  },
+  "author": {
+    "color": "gray",
+    "translate": "painting.poosmp.the_glue_factory.author"
+  }
+}
